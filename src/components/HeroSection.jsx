@@ -2,6 +2,8 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaDownload } from 'react-icons/fa';
 import { Typewriter } from 'react-simple-typewriter';
 
+const imageMyPhoto = '/Image/myphoto.jpg';
+
 const  HeroSection = ({ setActiveSection, darkMode }) => {
   const handleResumeDownload = () => {
     // Replace with your actual resume file path

@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaGraduationCap, FaUniversity, FaEnvelope, FaLinkedin, FaGithub, FaDownload } from 'react-icons/fa';
 import TimelineComponent from './TimelineComponent';
+
+const imageMyPhoto = import.meta.env.BASE_URL + 'Image/myphoto.jpg';
+
 const AboutSection = ({ setActiveSection, darkMode = true }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
@@ -88,7 +91,7 @@ const AboutSection = ({ setActiveSection, darkMode = true }) => {
                 {/* Image container with unified background */}
                 <div className="w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-xl relative">
                   <img 
-                    src="/Image/myphoto.jpg" 
+                    src={imageMyPhoto} 
                     alt="Tushar Bansal" 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />

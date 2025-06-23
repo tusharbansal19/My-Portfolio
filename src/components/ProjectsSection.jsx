@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronRight, ExternalLink, Github, Calendar, User, Code, Award, Eye, Heart, Star } from 'lucide-react';
 
+const imageNiyukti = import.meta.env.BASE_URL + 'Image/niyukti.png';
+const imageWeather = import.meta.env.BASE_URL + 'Image/weather.png';
+
 const projects = [
   {
     id: 'niyukti-setu',
@@ -8,7 +11,7 @@ const projects = [
     subtitle: 'Official Interview Platform',
     description: 'A web application for online official interviews, built for DRDO. Features secure authentication, real-time scheduling, and robust admin controls.',
     detailedDescription: 'Developed for DRDO, Niyukti Setu streamlines the official interview process with OTP authentication, user validation, and multi-role access. Built with a modern stack for reliability and scalability.',
-    image: '/Image/niyukti.png',
+    image: imageNiyukti,
     category: 'Government',
     status: '',
     timeline: '2 months',
@@ -58,7 +61,7 @@ const projects = [
     subtitle: 'Full-Stack Task Management',
     description: 'A full-stack web app for managing tasks, with real-time synchronization, CRUD operations, and user authentication.',
     detailedDescription: 'Designed for productivity, this app allows users to create, update, and track tasks in real time. Features include collaborative task boards, notifications, and a responsive UI.',
-    image: '/Image/weather.png',
+    image: imageWeather,
     category: 'Productivity',
     status: '',
     timeline: '2 months',
@@ -109,7 +112,7 @@ const projects = [
     subtitle: 'Real-time Food Ordering System',
     description: 'A real-time food ordering platform with OTP authentication, user validation, and multi-image support. Features RESTful APIs, responsive UI/UX, and cross-device compatibility.',
     detailedDescription: 'Built for seamless food ordering, GrabEats supports real-time order tracking, secure payments, and a scalable backend. Utilizes modern web technologies for a fast, reliable experience.',
-    image: '/Image/niyukti.png',
+    image: imageNiyukti,
     category: 'E-commerce',
     status: '',
     timeline: '1 month',
@@ -165,7 +168,7 @@ const projects = [
     subtitle: 'Auto Parts E-commerce',
     description: 'A commercial automobile parts web platform using Next.js and Prisma, featuring dynamic product filtering, server-side rendering, and a mobile-first responsive layout.',
     detailedDescription: 'Developed a robust auto parts e-commerce site with advanced filtering, SSR, and seamless mobile experience. Built with Next.js, Prisma, and modern UI libraries.',
-    image: '/Image/niyukti.png',
+    image: imageNiyukti,
     category: 'E-commerce',
     status: '',
     timeline: '1 month',
