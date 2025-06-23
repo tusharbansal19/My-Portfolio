@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradient-move {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-move {
+  animation: gradient-move 3s ease-in-out infinite;
+}
+
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-down {
+  animation: fade-in-down 0.5s ease both;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 24px 4px #a259ff66, 0 0 0 0 #b18cff33; }
+  50% { box-shadow: 0 0 36px 8px #a259ffcc, 0 0 16px 8px #b18cff99; }
+}
+.animate-glow {
+  animation: glow 2.5s infinite alternate;
+}
