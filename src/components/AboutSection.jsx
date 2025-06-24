@@ -91,7 +91,7 @@ const AboutSection = ({ setActiveSection}) => {
                 {/* Image container with unified background */}
                 <div className="w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-xl relative">
                   <img 
-                    src="/images/myphoto.jpg" 
+                    src="/image/myphoto.jpg" 
                     alt="Tushar Bansal" 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
