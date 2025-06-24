@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronRight, ExternalLink, Github, Calendar, User, Code, Award, Eye, Heart, Star } from 'lucide-react';
 
-const imageNiyukti = import.meta.env.BASE_URL + 'Image/niyukti.png';
-const imageWeather = import.meta.env.BASE_URL + 'Image/weather.png';
+const imageNiyukti = '/Image/niyukti.png';
+const imageWeather = '/Image/weather.png';
 
 const projects = [
   {
