@@ -5,7 +5,7 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [touched, setTouched] = useState({ name: false, email: false, message: false });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(null);
+  const [popup, setPopup] = useState({ show: false, success: false, message: '' });
   // PDF zoom state (height in px)
   const [pdfHeight, setPdfHeight] = useState(400);
   const [showResume, setShowResume] = useState(false);
@@ -15,7 +15,7 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
     name: !form.name ? 'Name is required.' : '',
     email: !form.email
       ? 'Email is required.'
-      : !/^\S+@\S+\.\S+$/.test(form.email)
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
       ? 'Enter a valid email address.'
       : '',
     message: !form.message ? 'Message is required.' : '',
@@ -34,14 +34,27 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
     setTouched({ name: true, email: true, message: true });
     if (errors.name || errors.email || errors.message) return;
     setLoading(true);
-    setSuccess(null);
-    // Placeholder for API integration
-    setTimeout(() => {
+    setPopup({ show: false, success: false, message: '' });
+    try {
+      const res = await fetch('https://grabeats-server.onrender.com/user/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPopup({ show: true, success: true, message: data.message || 'Message sent successfully!' });
+        setForm({ name: '', email: '', message: '' });
+        setTouched({ name: false, email: false, message: false });
+      } else {
+        setPopup({ show: true, success: false, message: data.message || 'Failed to send message. Please try again.' });
+      }
+    } catch (err) {
+      setPopup({ show: true, success: false, message: 'Network error. Please try again.' });
+    } finally {
       setLoading(false);
-      setSuccess(true);
-      setForm({ name: '', email: '', message: '' });
-      setTouched({ name: false, email: false, message: false });
-    }, 1500);
+      setTimeout(() => setPopup({ show: false, success: false, message: '' }), 3500);
+    }
   };
 
   return (
@@ -114,7 +127,13 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
       </div>
 
       <h2 className="text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text">Contact <span className="text-purple-300">Me</span></h2>
-      <form onSubmit={handleSubmit} className="w-full max-w-lg flex flex-col gap-4 p-8 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg" style={{background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)'}}>
+      <form onSubmit={handleSubmit} className="w-full max-w-lg flex flex-col gap-4 p-8 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg relative" style={{background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)'}}>
+        {/* Loading Spinner Overlay */}
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-20 rounded-2xl">
+            <div className="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin shadow-xl bg-gradient-to-tr from-purple-400 via-pink-400 to-blue-400" style={{boxShadow:'0 0 32px 8px #a259ff55'}}></div>
+          </div>
+        )}
         <div className="flex flex-col gap-1">
           <input type="text" name="name" placeholder="Full Name" value={form.name} onChange={handleChange} onBlur={handleBlur} required className="px-4 py-2 rounded bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none" />
           {touched.name && errors.name && <span className="text-red-400 text-xs mt-0.5">{errors.name}</span>}
@@ -130,8 +149,13 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
         <button type="submit" disabled={loading} className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-gradient-to-r from-purple-400 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition-transform">
           {loading ? 'Sending...' : <><FaPaperPlane /> Send Message</>}
         </button>
-        {success && <div className="text-green-400 text-center mt-2">Message sent successfully!</div>}
       </form>
+      {/* Popup Modal/Toast */}
+      {popup.show && (
+        <div className={`fixed top-8 left-1/2 transform -translate-x-1/2 z-50 px-6 py-4 rounded-xl shadow-lg text-lg font-semibold transition-all duration-300 ${popup.success ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+          {popup.message}
+        </div>
+      )}
     </section>
   );
 };
