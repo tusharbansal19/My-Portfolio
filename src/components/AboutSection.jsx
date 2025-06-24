@@ -4,7 +4,7 @@ import TimelineComponent from './TimelineComponent';
 
 const imageMyPhoto = import.meta.env.BASE_URL + 'Image/myphoto.jpg';
 
-const AboutSection = ({ setActiveSection, darkMode = true }) => {
+const AboutSection = ({ setActiveSection}) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);

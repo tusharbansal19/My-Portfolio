@@ -314,46 +314,6 @@ const TimelineComponent = ({ darkMode = true }) => {
           </div>
         </div>
       </div>
-
-      {/* Custom styles for timeline */}
-      <style jsx global>{`
-        .vertical-timeline::before {
-          background: linear-gradient(to bottom, rgba(162, 89, 255, 0.7), rgba(56, 178, 172, 0.5)) !important;
-          width: 3px !important;
-        }
-        
-        .vertical-timeline-element-date {
-          color: rgba(162, 89, 255, 0.8) !important;
-          font-weight: 600 !important;
-        }
-        
-        .vertical-timeline-element-content {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .vertical-timeline-element-content::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
-          opacity: 0.7;
-          pointer-events: none;
-        }
-        
-        .vertical-timeline-element-content:hover::before {
-          opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-          .vertical-timeline-element-date {
-            font-size: 0.875rem !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
