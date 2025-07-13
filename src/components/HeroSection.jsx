@@ -2,7 +2,7 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaDownload } from 'react-icons/fa';
 import { Typewriter } from 'react-simple-typewriter';
 
-const imageMyPhoto = '/Image/myphoto.jpg';
+const imageMyPhoto = '/Image/myphoto.png';
 
 const  HeroSection = ({ setActiveSection, darkMode }) => {
  
@@ -55,7 +55,7 @@ const  HeroSection = ({ setActiveSection, darkMode }) => {
       {/* Angled Image Card */}
       <div className="flex-shrink-0 z-10">
         <div className="w-72 h-80 rounded-2xl shadow-2xl flex items-center justify-center transform rotate-6 hover:rotate-3 transition-transform duration-500 relative bg-gradient-to-br from-purple-800/60 via-cyan-400/20 to-blue-900/60 backdrop-blur-xl border-4 border-purple-400/60" style={{boxShadow:'0 0 40px 10px #a259ff55, 0 2px 32px 0 #0008'}}>
-          <img src="/image/myphoto.jpg" alt="TUSHAR BANSAL" className="w-60 h-72 object-cover rounded-xl shadow-lg border-4 border-[#a259ff]" />
+          <img src="/image/myphoto.png" alt="TUSHAR BANSAL" className="w-60 h-72 object-cover rounded-xl shadow-lg border-4 border-[#a259ff]" />
           <div className="absolute -inset-1 rounded-2xl border-2 border-[#a259ff] opacity-60 blur-lg"></div>
         </div>
       </div>

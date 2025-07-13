@@ -1,60 +1,69 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronRight, ExternalLink, Github, Calendar, User, Code, Award, Eye, Heart, Star } from 'lucide-react';
 
-const imageNiyukti = '/image/niyukti.png';
-const imageWeather = '/image/weather.png';
+const imageTypingApp = '/image/typing.png';
+const imageWeather = '/image/dashboard.png';
+const imageGrabeats = '/image/grabeats.png';
+const imageAutomobiles = '/image/automobiles.png';
 
 const projects = [
   {
-    id: 'niyukti-setu',
-    title: 'DRDO Project: Niyukti Setu',
-    subtitle: 'Official Interview Platform',
-    description: 'A web application for online official interviews, built for DRDO. Features secure authentication, real-time scheduling, and robust admin controls.',
-    detailedDescription: 'Developed for DRDO, Niyukti Setu streamlines the official interview process with OTP authentication, user validation, and multi-role access. Built with a modern stack for reliability and scalability.',
-    image: imageNiyukti,
-    category: 'Government',
-    status: '',
-    timeline: '2 months',
-    teamSize: '5 developers',
+    id: 'dynamic-typing-webapp',
+    title: 'Dynamic Typing Web App',
+    subtitle: 'Real-time Typing Practice & Competition Platform',
+    description: 'A high-performance web app built for real-time typing practice, collaborative sessions, and global typing competitions. Features an interactive UI, live socket-based tracking, and animated keyboard interface.',
+    detailedDescription: 'The Dynamic Typing Web App enhances typing skills through real-time practice and competitions. It features a keyboard layout with animated key highlights, typewriter-style hero sections, and responsive design. Built using the MERN stack with Socket.IO for real-time communication and Redux for state management, it offers analytics, leaderboard tracking, and user authentication.',
+    image: imageTypingApp,
+    category: 'EdTech',
+    status: 'In Progress',
+    timeline: '1.5 months',
+    teamSize: '3 developers',
     technologies: [
       { name: 'React 18', category: 'Frontend', color: 'blue' },
       { name: 'Node.js', category: 'Backend', color: 'green' },
       { name: 'MongoDB', category: 'Database', color: 'purple' },
       { name: 'Express.js', category: 'Backend', color: 'green' },
       { name: 'Tailwind CSS', category: 'Styling', color: 'cyan' },
-      { name: 'Redux', category: 'State', color: 'purple' }
+      { name: 'Redux', category: 'State', color: 'purple' },
+      { name: 'Socket.IO', category: 'Real-time', color: 'yellow' }
     ],
     metrics: {
-      users: '10K+',
-      performance: '98%',
-      uptime: '99.9%'
+      users: '5K+',
+      performance: '95%',
+      uptime: '99.5%'
     },
+    
     features: [
-      'OTP Authentication & User Validation',
-      'Role-based Access Control',
-      'Real-time Interview Scheduling',
-      'Comprehensive Admin Dashboard',
-      'Multi-user Video Conferencing',
-      'Secure Data Management'
+      'Real-time Typing Competition',
+      'Interactive Keyboard with Animated Keys',
+      'Typewriter-Style Hero Section',
+      'Leaderboard & Progress Tracker',
+      'Socket-based Typing Sync',
+      'Responsive & Mobile Friendly UI'
     ],
     challenges: [
-      'Ensuring data security',
-      'Scalable video conferencing',
-      'Role management'
+      'Smooth real-time sync across sockets',
+      'Maintaining UI responsiveness during typing',
+      'Efficient state management with Redux'
     ],
-    achievements: [],
+    achievements: [
+      'Built advanced keyboard animation system',
+      'Achieved <100ms socket lag in multiplayer mode',
+      'Designed visually engaging UI with Tailwind'
+    ],
     links: {
-      live: '',
-      github: 'https://github.com/PrajjwalVajpayee/niyuktisetu',
+      live: 'https://typing-webapp-frountend.onrender.com/',
+      github: 'https://github.com/tusharbansal00/dynamic-typing-webapp', // example
       case_study: ''
     },
     meta: [
-      { label: 'Role', value: 'Full Stack Lead', icon: User },
-      { label: 'Duration', value: '2 months', icon: Calendar },
-      { label: 'Team', value: '5 developers', icon: User },
-      { label: 'Status', value: 'Completed', icon: Award }
+      { label: 'Role', value: 'Full Stack Developer', icon: User },
+      { label: 'Duration', value: '1.5 months', icon: Calendar },
+      { label: 'Team', value: '1 developers', icon: User },
+      { label: 'Status', value: 'In Progress', icon: Award }
     ]
   },
+  
   {
     id: 'task-manager',
     title: 'Task Manager Web App',
@@ -95,7 +104,7 @@ const projects = [
       'Improved productivity by 30%'
     ],
     links: {
-      live: '',
+      live: 'https://t-task-management.onrender.com/',
       github: 'https://github.com/tusharbansal19/TaskManagement',
       case_study: ''
     },
@@ -112,7 +121,7 @@ const projects = [
     subtitle: 'Real-time Food Ordering System',
     description: 'A real-time food ordering platform with OTP authentication, user validation, and multi-image support. Features RESTful APIs, responsive UI/UX, and cross-device compatibility.',
     detailedDescription: 'Built for seamless food ordering, GrabEats supports real-time order tracking, secure payments, and a scalable backend. Utilizes modern web technologies for a fast, reliable experience.',
-    image: imageNiyukti,
+    image: imageGrabeats,
     category: 'E-commerce',
     status: '',
     timeline: '1 month',
@@ -151,7 +160,7 @@ const projects = [
       'Handled 5K+ users at launch'
     ],
     links: {
-      live: '',
+      live: 'https://grabeats.onrender.com/',
       github: 'https://github.com/tusharbansal19/GrabEats',
       case_study: ''
     },
@@ -168,7 +177,7 @@ const projects = [
     subtitle: 'Auto Parts E-commerce',
     description: 'A commercial automobile parts web platform using Next.js and Prisma, featuring dynamic product filtering, server-side rendering, and a mobile-first responsive layout.',
     detailedDescription: 'Developed a robust auto parts e-commerce site with advanced filtering, SSR, and seamless mobile experience. Built with Next.js, Prisma, and modern UI libraries.',
-    image: imageNiyukti,
+    image: imageAutomobiles,
     category: 'E-commerce',
     status: '',
     timeline: '1 month',
@@ -202,7 +211,7 @@ const projects = [
       'Positive client feedback'
     ],
     links: {
-      live: '',
+      live: 'https://automobiles-next.onrender.com',
       github: 'https://github.com/tusharbansal19/automobiles-next',
       case_study: ''
     },
@@ -344,7 +353,17 @@ function ProjectCard({ project, reverse, index }) {
             </p>
 
             <div className="flex  gap-3">
-
+            {project.links.live && (
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-sm font-medium hover:from-purple-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105 group/btn backdrop-blur-sm"
+              >
+                <ExternalLink className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
+                <span>Live</span>
+              </a>
+            )}
             <a
               href={project.links.github}
               target="_blank"
