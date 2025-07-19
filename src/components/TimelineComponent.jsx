@@ -7,22 +7,7 @@ const TimelineComponent = ({ darkMode = true }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredElement, setHoveredElement] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const sectionRef = useRef(null);
-
-  // Debug logging
-  useEffect(() => {
-    setIsLoaded(true);
-    
-    // Fallback: Force visibility after 2 seconds if not visible
-    const fallbackTimer = setTimeout(() => {
-      if (!isVisible) {
-        setIsVisible(true);
-      }
-    }, 2000);
-    
-    return () => clearTimeout(fallbackTimer);
-  }, [isVisible]);
 
   // Mouse tracking for interactive effects
   useEffect(() => {
@@ -51,10 +36,7 @@ const TimelineComponent = ({ darkMode = true }) => {
           setIsVisible(true);
         }
       },
-      { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px' // Trigger when 100px from bottom
-      }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -137,29 +119,16 @@ const TimelineComponent = ({ darkMode = true }) => {
     }
   };
 
-  // Fallback if component fails to load
-  if (!isLoaded) {
-    return (
-      <section className="min-h-screen py-16 px-4 relative overflow-hidden flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
-          <p className="text-white">Loading Timeline...</p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section 
       ref={sectionRef}
-      id="timeline"
       className="min-h-screen py-16 px-4 relative overflow-hidden"
       style={{
-        background: 'transparent',
-        zIndex: 1,
-        position: 'relative'
+        background: 'transparent'
       }}
     >
+      {/* Dynamic background gradient removed for transparency */}
+
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 12 }).map((_, i) => (
@@ -192,7 +161,6 @@ const TimelineComponent = ({ darkMode = true }) => {
         <VerticalTimeline
           animate={true}
           lineColor="rgba(162, 89, 255, 0.3)"
-          className="vertical-timeline"
         >
           {timelineData.map((item, index) => (
             <VerticalTimelineElement
@@ -210,14 +178,17 @@ const TimelineComponent = ({ darkMode = true }) => {
                 backdropFilter: 'blur(18px) saturate(160%)',
                 WebkitBackdropFilter: 'blur(18px) saturate(160%)',
                 color: '#fff',
-                transition: 'all 0.3s cubic-bezier(.4,2,.3,1)',
-                width: '45%',
-                margin: '0 auto'
+                transition: 'all 0.3s cubic-bezier(.4,2,.3,1)'
               }}
               contentArrowStyle={{
                 borderRight: '7px solid rgba(162, 89, 255, 0.25)'
               }}
-              date=""
+              date={
+                <div className="flex items-center gap-2 text-purple-300 font-semibold">
+                  <FaCalendarAlt className="text-sm" />
+                  {item.date}
+                </div>
+              }
               iconStyle={{
                 background: hoveredElement === item.id
                   ? 'radial-gradient(circle, rgba(162,89,255,0.7) 0%, rgba(56,178,172,0.5) 100%)'
@@ -234,12 +205,7 @@ const TimelineComponent = ({ darkMode = true }) => {
                 transition: 'all 0.3s cubic-bezier(.4,2,.3,1)',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                color: 'white',
-                fontSize: '20px'
+                justifyContent: 'center'
               }}
               icon={<item.icon />}
               onMouseEnter={() => setHoveredElement(item.id)}
@@ -256,12 +222,6 @@ const TimelineComponent = ({ darkMode = true }) => {
                 <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mb-3 ${getTypeColor(item.type)} bg-white/10`}>
                   {item.type === 'education' ? <FaGraduationCap /> : <FaBriefcase />}
                   {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
-                </div>
-
-                {/* Date Card */}
-                <div className="inline-flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold mb-3 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border border-white/20 text-purple-300 hover:bg-white/10 transition-all duration-300">
-                  <FaCalendarAlt className="text-sm" />
-                  {item.date}
                 </div>
 
                 {/* Title and Subtitle */}

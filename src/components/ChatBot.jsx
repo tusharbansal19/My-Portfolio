@@ -26,11 +26,9 @@ const ChatBot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [robotState, setRobotState] = useState('idle'); // idle, typing, speaking, listening, navigating, thinking
 
-  // Debug robot state changes - only in development
+  // Debug robot state changes
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Robot state changed to:', robotState);
-    }
+    console.log('Robot state changed to:', robotState);
   }, [robotState]);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -318,60 +316,75 @@ If you have a specific question that I can't answer, please visit the Contact se
         input.includes('about') || input.includes('skills') || input.includes('projects') || input.includes('achievements') || 
         input.includes('contact') || input.includes('timeline') || input.includes('home') || input.includes('hero')) {
       
-        setTimeout(() => {
-          // Set navigating state immediately when navigation starts
-          setRobotState('navigating');
+      console.log('Navigation command detected:', input);
+      
+      setTimeout(() => {
+        // Set navigating state immediately when navigation starts
+        console.log('Setting robot state to navigating...');
+        setRobotState('navigating');
+        console.log('Navigation started - should show robot-2.png');
         
         // Perform the actual navigation
         let sectionFound = false;
         
         if (input.includes('about') || input.includes('profile') || input.includes('tushar')) {
           const aboutSection = document.getElementById('about');
-                  if (aboutSection) {
-          aboutSection.scrollIntoView({ behavior: 'smooth' });
-          sectionFound = true;
-        }
+          if (aboutSection) {
+            console.log('Scrolling to about section');
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
+          }
         } else if (input.includes('skill') || input.includes('technology') || input.includes('tech')) {
           const skillsSection = document.getElementById('skills');
           if (skillsSection) {
+            console.log('Scrolling to skills section');
             skillsSection.scrollIntoView({ behavior: 'smooth' });
             sectionFound = true;
           }
         } else if (input.includes('project') || input.includes('work') || input.includes('portfolio')) {
           const projectsSection = document.getElementById('projects');
           if (projectsSection) {
+            console.log('Scrolling to projects section');
             projectsSection.scrollIntoView({ behavior: 'smooth' });
             sectionFound = true;
           }
         } else if (input.includes('achievement') || input.includes('accomplishment') || input.includes('stats')) {
           const achievementsSection = document.getElementById('achievements');
           if (achievementsSection) {
+            console.log('Scrolling to achievements section');
             achievementsSection.scrollIntoView({ behavior: 'smooth' });
             sectionFound = true;
           }
         } else if (input.includes('contact') || input.includes('reach') || input.includes('email') || input.includes('message')) {
           const contactSection = document.getElementById('contact');
           if (contactSection) {
+            console.log('Scrolling to contact section');
             contactSection.scrollIntoView({ behavior: 'smooth' });
             sectionFound = true;
           }
         } else if (input.includes('timeline') || input.includes('experience') || input.includes('journey') || input.includes('history')) {
           const timelineSection = document.getElementById('timeline');
           if (timelineSection) {
+            console.log('Scrolling to timeline section');
             timelineSection.scrollIntoView({ behavior: 'smooth' });
             sectionFound = true;
           }
         } else if (input.includes('home') || input.includes('hero') || input.includes('start') || input.includes('main')) {
           const heroSection = document.getElementById('hero');
           if (heroSection) {
+            console.log('Scrolling to hero section');
             heroSection.scrollIntoView({ behavior: 'smooth' });
             sectionFound = true;
           }
         }
         
+        console.log('Section found:', sectionFound);
+        
         // Reset to idle after navigation completes
         setTimeout(() => {
+          console.log('Resetting robot state to idle...');
           setRobotState('idle');
+          console.log('Navigation completed - returning to idle');
         }, 2000); // Show navigating state for 2 seconds
         
       }, 1500); // Delay navigation to let user read the response
