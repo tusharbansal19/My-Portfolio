@@ -32,7 +32,7 @@ const FloatingNav = ({ activeSection, setActiveSection }) => {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 floating-nav">
+    <div className="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-50 floating-nav">
       <AnimatePresence>
         {isOpen && (
           <motion.div

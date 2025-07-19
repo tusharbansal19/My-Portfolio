@@ -36,9 +36,9 @@ const ScrollToTop = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-3 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300"
+          className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 p-2 sm:p-3 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300"
         >
-          <ArrowUpIcon className="w-6 h-6" />
+          <ArrowUpIcon className="w-5 h-5 sm:w-6 sm:h-6" />
         </motion.button>
       )}
     </AnimatePresence>

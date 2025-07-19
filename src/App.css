@@ -139,3 +139,15 @@ html {
 .nav-active {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+/* Mobile-specific floating nav adjustments */
+@media (max-width: 640px) {
+  .floating-nav {
+    bottom: 1rem !important;
+    left: 1rem !important;
+  }
+  
+  .floating-nav .absolute {
+    bottom: 3.5rem !important;
+  }
+}

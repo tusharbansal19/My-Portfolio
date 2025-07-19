@@ -174,7 +174,7 @@ function App() {
       </main>
         
       <FloatingNav activeSection={activeSection} setActiveSection={setActiveSection} />
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
     </div>
   );
 }
