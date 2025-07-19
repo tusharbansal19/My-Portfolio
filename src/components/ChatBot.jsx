@@ -24,8 +24,26 @@ const ChatBot = () => {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [robotState, setRobotState] = useState('idle'); // idle, typing, speaking, listening, navigating, thinking
+
+  // Debug robot state changes
+  useEffect(() => {
+    console.log('Robot state changed to:', robotState);
+  }, [robotState]);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+
+  // Robot images for different states
+  const robotImages = {
+    idle: '/image/robot.png',
+    typing: '/image/robot-3.png',
+    speaking: '/image/robot-1.png',
+    listening: '/image/robot-1.png',
+    navigating: '/image/robot-2.png',
+    thinking: '/image/robot-1.png',
+    chat: '/image/robot-2.png',
+    cloud: '/image/robot-4.png'
+  };
 
   // Portfolio information database
   const portfolioData = {
@@ -254,65 +272,121 @@ If you have a specific question that I can't answer, please visit the Contact se
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
     setIsTyping(true);
+    
+    // Check if it's a complex query that needs thinking
+    const isComplexQuery = inputText.toLowerCase().includes('how') || 
+                          inputText.toLowerCase().includes('why') || 
+                          inputText.toLowerCase().includes('explain') ||
+                          inputText.toLowerCase().includes('what is') ||
+                          inputText.toLowerCase().includes('tell me about');
+    
+    setRobotState(isComplexQuery ? 'thinking' : 'typing');
 
-    // Simulate bot response delay
+    // Show thinking state when processing response
     setTimeout(() => {
-      const botResponse = getBotResponse(inputText);
-      const botMessage = {
-        id: Date.now() + 1,
-        type: 'bot',
-        text: botResponse,
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
+      setRobotState('thinking');
       
-      // Handle navigation if requested
-      handleNavigation(inputText.toLowerCase());
-    }, 1000);
+      // Simulate bot response delay
+      setTimeout(() => {
+        const botResponse = getBotResponse(inputText);
+        const botMessage = {
+          id: Date.now() + 1,
+          type: 'bot',
+          text: botResponse,
+          timestamp: new Date()
+        };
+
+        setMessages(prev => [...prev, botMessage]);
+        setIsTyping(false);
+        
+        // Handle navigation if requested
+        handleNavigation(inputText.toLowerCase());
+        
+        // Reset to idle after a short delay
+        setTimeout(() => {
+          setRobotState('idle');
+        }, 500);
+      }, 800);
+    }, 200);
   };
 
   // Handle navigation to different sections
   const handleNavigation = (input) => {
-    if (input.includes('go to') || input.includes('navigate') || input.includes('show me') || input.includes('take me to')) {
+    if (input.includes('go to') || input.includes('navigate') || input.includes('show me') || input.includes('take me to') || 
+        input.includes('about') || input.includes('skills') || input.includes('projects') || input.includes('achievements') || 
+        input.includes('contact') || input.includes('timeline') || input.includes('home') || input.includes('hero')) {
+      
+      console.log('Navigation command detected:', input);
+      
       setTimeout(() => {
-        if (input.includes('about') || input.includes('profile')) {
+        // Set navigating state immediately when navigation starts
+        console.log('Setting robot state to navigating...');
+        setRobotState('navigating');
+        console.log('Navigation started - should show robot-2.png');
+        
+        // Perform the actual navigation
+        let sectionFound = false;
+        
+        if (input.includes('about') || input.includes('profile') || input.includes('tushar')) {
           const aboutSection = document.getElementById('about');
           if (aboutSection) {
+            console.log('Scrolling to about section');
             aboutSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
-        } else if (input.includes('skill') || input.includes('technology')) {
+        } else if (input.includes('skill') || input.includes('technology') || input.includes('tech')) {
           const skillsSection = document.getElementById('skills');
           if (skillsSection) {
+            console.log('Scrolling to skills section');
             skillsSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
-        } else if (input.includes('project') || input.includes('work')) {
+        } else if (input.includes('project') || input.includes('work') || input.includes('portfolio')) {
           const projectsSection = document.getElementById('projects');
           if (projectsSection) {
+            console.log('Scrolling to projects section');
             projectsSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
-        } else if (input.includes('achievement') || input.includes('accomplishment')) {
+        } else if (input.includes('achievement') || input.includes('accomplishment') || input.includes('stats')) {
           const achievementsSection = document.getElementById('achievements');
           if (achievementsSection) {
+            console.log('Scrolling to achievements section');
             achievementsSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
-        } else if (input.includes('contact') || input.includes('reach') || input.includes('email')) {
+        } else if (input.includes('contact') || input.includes('reach') || input.includes('email') || input.includes('message')) {
           const contactSection = document.getElementById('contact');
           if (contactSection) {
+            console.log('Scrolling to contact section');
             contactSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
-        } else if (input.includes('timeline') || input.includes('experience') || input.includes('journey')) {
+        } else if (input.includes('timeline') || input.includes('experience') || input.includes('journey') || input.includes('history')) {
           const timelineSection = document.getElementById('timeline');
           if (timelineSection) {
+            console.log('Scrolling to timeline section');
             timelineSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
-        } else if (input.includes('home') || input.includes('hero') || input.includes('start')) {
+        } else if (input.includes('home') || input.includes('hero') || input.includes('start') || input.includes('main')) {
           const heroSection = document.getElementById('hero');
           if (heroSection) {
+            console.log('Scrolling to hero section');
             heroSection.scrollIntoView({ behavior: 'smooth' });
+            sectionFound = true;
           }
         }
+        
+        console.log('Section found:', sectionFound);
+        
+        // Reset to idle after navigation completes
+        setTimeout(() => {
+          console.log('Resetting robot state to idle...');
+          setRobotState('idle');
+          console.log('Navigation completed - returning to idle');
+        }, 2000); // Show navigating state for 2 seconds
+        
       }, 1500); // Delay navigation to let user read the response
     }
   };
@@ -331,20 +405,29 @@ If you have a specific question that I can't answer, please visit the Contact se
 
     recognition.onstart = () => {
       setIsListening(true);
+      setRobotState('listening'); // Shows robot-1.png
     };
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setInputText(transcript);
       setIsListening(false);
+      // Keep listening state for a moment, then go to idle
+      setTimeout(() => {
+        if (!isTyping && !isSpeaking) {
+          setRobotState('idle');
+        }
+      }, 500);
     };
 
     recognition.onerror = () => {
       setIsListening(false);
+      setRobotState('idle');
     };
 
     recognition.onend = () => {
       setIsListening(false);
+      setRobotState('idle');
     };
 
     recognition.start();
@@ -361,8 +444,19 @@ If you have a specific question that I can't answer, please visit the Contact se
       utterance.pitch = 1;
       utterance.volume = 0.8;
       
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
+      utterance.onstart = () => {
+        setIsSpeaking(true);
+        setRobotState('speaking'); // Shows robot-1.png
+      };
+      utterance.onend = () => {
+        setIsSpeaking(false);
+        // Keep speaking state for a moment, then go to idle
+        setTimeout(() => {
+          if (!isTyping && !isListening) {
+            setRobotState('idle');
+          }
+        }, 500);
+      };
       
       speechSynthesis.speak(utterance);
     }
@@ -375,6 +469,7 @@ If you have a specific question that I can't answer, please visit the Contact se
       setIsSpeaking(false);
     }
     setIsOpen(false);
+    setRobotState('idle');
   };
 
   // Auto-scroll to bottom
@@ -393,13 +488,16 @@ If you have a specific question that I can't answer, please visit the Contact se
   return (
     <>
       {/* Floating Text Clouds */}
-      <FloatingTextClouds />
+      <FloatingTextClouds onStateChange={setRobotState} />
       
       {/* Robot Image Button */}
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          setRobotState('chat');
+        }}
         className="fixed bottom-16 sm:bottom-20 md:bottom-24 right-2 sm:right-4 md:right-6 z-50 cursor-pointer"
         animate={{
           scale: isOpen ? 0.8 : 1,
@@ -411,7 +509,32 @@ If you have a specific question that I can't answer, please visit the Contact se
           transition={{ duration: 0.3 }}
           className="relative"
         >
-            <img src="/image/robot.png" alt="AI Assistant Robot" className="w-16 h-16 sm:w-20 sm:h-20 object-contain robot-icon robot-glow robot-image" />
+            <img 
+              src={robotImages[robotState] || robotImages.idle} 
+              alt="AI Assistant Robot" 
+              className="w-16 h-16 sm:w-20 sm:h-20 object-contain robot-icon robot-glow robot-image" 
+              onError={(e) => {
+                console.error('Robot image failed to load:', robotImages[robotState]);
+                e.target.src = robotImages.idle;
+              }}
+            />
+            {/* Debug indicator - remove in production */}
+            <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+              {robotState}
+            </div>
+            {/* Test button - remove in production */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const states = ['idle', 'typing', 'speaking', 'listening', 'navigating', 'thinking', 'chat', 'cloud'];
+                const currentIndex = states.indexOf(robotState);
+                const nextState = states[(currentIndex + 1) % states.length];
+                setRobotState(nextState);
+              }}
+              className="absolute -bottom-2 -left-2 bg-blue-500 text-white text-xs px-1 rounded-full hover:bg-blue-600"
+            >
+              Test
+            </button>
           
        
           <motion.div
@@ -431,6 +554,46 @@ If you have a specific question that I can't answer, please visit the Contact se
           />
         </motion.div>
       </motion.button>
+
+      {/* Robot Image Above Chat Header */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }
+            }}
+            exit={{ 
+              opacity: 0, 
+              y: 20, 
+              scale: 0.8,
+              transition: {
+                duration: 0.2
+              }
+            }}
+            className="fixed bottom-[calc(16rem+5rem)] sm:bottom-[calc(24rem+5rem)] md:bottom-[calc(28rem+5rem)] right-2 sm:right-4 md:right-6 z-50"
+          >
+            <div className="w-20 h-20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg ">
+              <img 
+                src={robotImages[robotState] || robotImages.idle} 
+                alt="AI Assistant Robot" 
+                className="w-16 h-16 object-contain"
+                onError={(e) => {
+                  console.error('Chat robot image failed to load:', robotImages[robotState]);
+                  e.target.src = robotImages.idle;
+                }}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Chat Window */}
       <AnimatePresence>
@@ -466,16 +629,16 @@ If you have a specific question that I can't answer, please visit the Contact se
             {/* Header */}
             <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 rounded-t-2xl flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center overflow-hidden">
-                  <img 
-                    src="/image/robot.png" 
-                    alt="AI Assistant Robot" 
-                    className="w-10 h-10 object-contain"
-                  />
-                </div>
                 <div>
                   <h3 className="font-semibold">Tushar's AI Assistant</h3>
-                  <p className="text-xs opacity-90">Ask me anything!</p>
+                  <p className="text-xs opacity-90">
+                    {robotState === 'typing' ? 'Typing...' : 
+                     robotState === 'thinking' ? 'Thinking...' : 
+                     robotState === 'speaking' ? 'Speaking...' : 
+                     robotState === 'listening' ? 'Listening...' : 
+                     robotState === 'navigating' ? 'Navigating...' : 
+                     'Ask me anything!'}
+                  </p>
                 </div>
               </div>
               <button
@@ -524,7 +687,10 @@ If you have a specific question that I can't answer, please visit the Contact se
                       </span>
                       {message.type === 'bot' && (
                         <button
-                          onClick={() => handleSpeak(message.text)}
+                          onClick={() => {
+                            setRobotState('speaking');
+                            handleSpeak(message.text);
+                          }}
                           className="ml-2 p-1 hover:bg-gray-200 rounded-full transition-colors"
                         >
                           {isSpeaking ? (
@@ -599,7 +765,15 @@ If you have a specific question that I can't answer, please visit the Contact se
                   ref={inputRef}
                   type="text"
                   value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
+                  onChange={(e) => {
+                    setInputText(e.target.value);
+                    // Show typing state when user is typing
+                    if (e.target.value.length > 0 && robotState === 'idle') {
+                      setRobotState('typing');
+                    } else if (e.target.value.length === 0) {
+                      setRobotState('idle');
+                    }
+                  }}
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message..."
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"

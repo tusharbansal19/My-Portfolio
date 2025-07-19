@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const FloatingTextClouds = () => {
+const FloatingTextClouds = ({ onStateChange }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   
   const messages = [
@@ -20,10 +20,18 @@ const FloatingTextClouds = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTextIndex((prev) => (prev + 1) % messages.length);
+      // Trigger cloud state when text changes
+      if (onStateChange) {
+        onStateChange('cloud');
+        // Reset to idle after 1 second
+        setTimeout(() => {
+          onStateChange('idle');
+        }, 1000);
+      }
     }, 3000); // Change text every 3 seconds
 
     return () => clearInterval(interval);
-  }, [messages.length]);
+  }, [messages.length, onStateChange]);
 
   return (
     <div className="fixed bottom-16 sm:bottom-20 md:bottom-24 right-2 sm:right-4 md:right-6 pointer-events-none z-50">
