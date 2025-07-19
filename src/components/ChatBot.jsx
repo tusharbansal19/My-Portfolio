@@ -518,23 +518,7 @@ If you have a specific question that I can't answer, please visit the Contact se
                 e.target.src = robotImages.idle;
               }}
             />
-            {/* Debug indicator - remove in production */}
-            <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-              {robotState}
-            </div>
-            {/* Test button - remove in production */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                const states = ['idle', 'typing', 'speaking', 'listening', 'navigating', 'thinking', 'chat', 'cloud'];
-                const currentIndex = states.indexOf(robotState);
-                const nextState = states[(currentIndex + 1) % states.length];
-                setRobotState(nextState);
-              }}
-              className="absolute -bottom-2 -left-2 bg-blue-500 text-white text-xs px-1 rounded-full hover:bg-blue-600"
-            >
-              Test
-            </button>
+           
           
        
           <motion.div
