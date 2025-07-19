@@ -7,6 +7,7 @@ import StarBackground from './components/StarBackground';
 import FloatingNav from './components/FloatingNav';
 import ScrollToTop from './components/ScrollToTop';
 import ChatBot from './components/ChatBot';
+import TimelineComponent from './components/TimelineComponent';
 import { debounce, shouldReduceMotion } from './utils/performance';
 import './App.css';
 
@@ -16,7 +17,6 @@ const SkillsSection = lazy(() => import('./components/SkillsSection'));
 const ProjectsSection = lazy(() => import('./components/ProjectsSection'));
 const AchievementsSection = lazy(() => import('./components/AchievementsSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
-const TimelineComponent = lazy(() => import('./components/TimelineComponent'));
 
 // Loading component for lazy loaded sections
 const SectionLoader = () => (
@@ -141,17 +141,15 @@ function App() {
         
         {/* Timeline Section */}
         <Element name="timeline" className="element">
-          <Suspense fallback={<SectionLoader />}>
-            <motion.section 
-              id="timeline"
-              variants={sectionVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <TimelineComponent />
-            </motion.section>
-          </Suspense>
+          <motion.section 
+            id="timeline"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <TimelineComponent />
+          </motion.section>
         </Element>
         
         <Element name="skills" className="element">
