@@ -629,8 +629,19 @@ If you have a specific question that I can't answer, please visit the Contact se
             {/* Header */}
             <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4 rounded-t-2xl flex items-center justify-between">
               <div className="flex items-center gap-3">
+                <div className="w-12 md:hidden h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={robotImages[robotState] || robotImages.idle} 
+                    alt="AI Assistant Robot" 
+                    className="w-10 h-10 sm:w-14 sm:h-14 object-contain"
+                    onError={(e) => {
+                      console.error('Chat header robot image failed to load:', robotImages[robotState]);
+                      e.target.src = robotImages.idle;
+                    }}
+                  />
+                </div>
                 <div>
-                  <h3 className="font-semibold">Tushar's AI Assistant</h3>
+                  <h3 className="font-semibold text-sm sm:text-base">Tushar's AI Assistant</h3>
                   <p className="text-xs opacity-90">
                     {robotState === 'typing' ? 'Typing...' : 
                      robotState === 'thinking' ? 'Thinking...' : 
