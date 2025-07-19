@@ -12,6 +12,7 @@ import StarBackground from './components/StarBackground';
 import FloatingNav from './components/FloatingNav';
 import ScrollToTop from './components/ScrollToTop';
 import TimelineComponent from './components/TimelineComponent';
+import ChatBot from './components/ChatBot';
 import './App.css';
 
 
@@ -174,7 +175,8 @@ function App() {
       </main>
         
       <FloatingNav activeSection={activeSection} setActiveSection={setActiveSection} />
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
+      <ChatBot />
     </div>
   );
 }
