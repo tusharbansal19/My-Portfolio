@@ -11,10 +11,13 @@ const StarBackground = () => {
     let width = window.innerWidth;
     let height = window.innerHeight;
     let animationId;
+    canvas.width = width;
+    canvas.height = height;
 
-    // Optimistic calculation based on viewport
-    let STAR_COUNT = Math.max(20, Math.floor((width * height) / 25000));
-    let LINE_DISTANCE = Math.max(60, Math.min(width, height) / 5);
+    // Responsive values based on viewport
+    const isMobile = width < 768;
+    let STAR_COUNT = isMobile ? 30 : 100;
+    let LINE_DISTANCE = isMobile ? 100 : 120;
 
     // Create stars with random positions and velocities
     let stars = Array.from({ length: STAR_COUNT }).map(() => ({
@@ -79,16 +82,26 @@ const StarBackground = () => {
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-      // Recalculate based on new viewport
-      STAR_COUNT = Math.max(20, Math.floor((width * height) / 25000));
-      LINE_DISTANCE = Math.max(60, Math.min(width, height) / 6);
-      stars = Array.from({ length: STAR_COUNT }).map(() => ({
-        x: getRandom(0, width),
-        y: getRandom(0, height),
-        r: getRandom(1, 2.2),
-        vx: getRandom(-0.15, 0.15),
-        vy: getRandom(-0.15, 0.15),
-      }));
+      
+      // Update responsive values
+      const newIsMobile = width < 768;
+      const newStarCount = newIsMobile ? 20 : 100;
+      const newLineDistance = newIsMobile ? 80 : 120;
+      
+      // Recreate stars if count changed
+      if (newStarCount !== STAR_COUNT) {
+        STAR_COUNT = newStarCount;
+        LINE_DISTANCE = newLineDistance;
+        stars = Array.from({ length: STAR_COUNT }).map(() => ({
+          x: getRandom(0, width),
+          y: getRandom(0, height),
+          r: getRandom(1, 2.2),
+          vx: getRandom(-0.15, 0.15),
+          vy: getRandom(-0.15, 0.15),
+        }));
+      } else {
+        LINE_DISTANCE = newLineDistance;
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => {
