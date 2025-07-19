@@ -290,3 +290,158 @@ input, textarea, select {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
+/* Override react-vertical-timeline-component default styles */
+.vertical-timeline-element-icon {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  font-size: 20px !important;
+}
+
+.vertical-timeline-element-content {
+  border-radius: 20px !important;
+  padding: 1.5rem !important;
+  box-shadow: 0 2px 24px 0 rgba(0,0,0,0.18) !important;
+}
+
+.vertical-timeline-element-date {
+  background: rgba(30, 30, 60, 0.8) !important;
+  color: #a855f7 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 20px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+/* Ensure the timeline line is visible */
+.vertical-timeline::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  width: 2px !important;
+  height: 100% !important;
+  background: rgba(162, 89, 255, 0.3) !important;
+  transform: translateX(-50%) !important;
+  z-index: 1 !important;
+}
+
+/* Mobile timeline adjustments */
+@media (max-width: 768px) {
+  .vertical-timeline::before {
+    left: 20px !important;
+    transform: none !important;
+  }
+  
+  .vertical-timeline-element-icon {
+    left: 20px !important;
+    transform: none !important;
+  }
+  
+  .vertical-timeline-element-date {
+    left: 20px !important;
+    transform: none !important;
+    margin-top: 50px !important;
+  }
+  
+  .vertical-timeline-element-content {
+    width: calc(100% - 60px) !important;
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+  
+  .vertical-timeline-element:nth-child(odd) .vertical-timeline-element-content,
+  .vertical-timeline-element:nth-child(even) .vertical-timeline-element-content {
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* Additional fixes for timeline visibility */
+.vertical-timeline {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+.vertical-timeline-element {
+  position: relative !important;
+  margin: 2em 0 !important;
+  z-index: 2 !important;
+}
+
+/* Ensure timeline line is always visible */
+.vertical-timeline::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  width: 2px !important;
+  height: 100% !important;
+  background: rgba(162, 89, 255, 0.3) !important;
+  transform: translateX(-50%) !important;
+  z-index: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Fix for content positioning */
+.vertical-timeline-element:nth-child(odd) .vertical-timeline-element-content {
+  margin-left: 0 !important;
+  margin-right: 55% !important;
+}
+
+.vertical-timeline-element:nth-child(even) .vertical-timeline-element-content {
+  margin-left: 55% !important;
+  margin-right: 0 !important;
+}
+
+/* Ensure icons are properly positioned and styled */
+.vertical-timeline-element-icon {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translateX(-50%) !important;
+  z-index: 3 !important;
+  color: white !important;
+  font-size: 20px !important;
+}
+
+/* Mobile specific overrides */
+@media (max-width: 768px) {
+  .vertical-timeline::before {
+    left: 20px !important;
+    transform: none !important;
+  }
+  
+  .vertical-timeline-element-icon {
+    left: 20px !important;
+    transform: none !important;
+  }
+  
+  .vertical-timeline-element-content {
+    width: calc(100% - 60px) !important;
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+  
+  .vertical-timeline-element:nth-child(odd) .vertical-timeline-element-content,
+  .vertical-timeline-element:nth-child(even) .vertical-timeline-element-content {
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+}
