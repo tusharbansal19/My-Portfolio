@@ -9,6 +9,8 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
   // PDF zoom state (height in px)
   const [pdfHeight, setPdfHeight] = useState(400);
   const [showResume, setShowResume] = useState(false);
+  
+  
 
   // Validation logic
   const errors = {

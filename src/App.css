@@ -62,3 +62,80 @@ html {
     font-size: 0.875rem !important;
   }
 }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.8);
+}
+
+/* Element styling for react-scroll */
+.element {
+  min-height: 100vh;
+  scroll-margin-top: 80px;
+}
+
+
+
+/* Floating nav animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-nav {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Section transitions */
+.section-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.section-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 800ms, transform 800ms;
+}
+
+.section-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-exit-active {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 800ms, transform 800ms;
+}
+
+/* Pulse animation for active nav items */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+  }
+}
+
+.nav-active {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

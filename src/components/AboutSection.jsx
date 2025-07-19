@@ -4,7 +4,7 @@ import TimelineComponent from './TimelineComponent';
 
 const imageMyPhoto = 'image/myphoto.png';
 
-const AboutSection = ({ setActiveSection}) => {
+const AboutSection = ({ setActiveSection, darkMode }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
@@ -47,7 +47,6 @@ const AboutSection = ({ setActiveSection}) => {
   }, []);
 
   return (
-    <>
     <section 
       ref={sectionRef}
       className="min-h-screen flex items-center justify-center px-4 py-16 relative overflow-hidden"
@@ -227,8 +226,6 @@ const AboutSection = ({ setActiveSection}) => {
         }
       `}</style>
     </section>
-    <TimelineComponent/>
-    </>
   );
 };
 
