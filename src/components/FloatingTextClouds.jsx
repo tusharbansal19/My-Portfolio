@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const FloatingTextClouds = ({ onStateChange }) => {
@@ -17,21 +17,23 @@ const FloatingTextClouds = ({ onStateChange }) => {
     "Let's explore together!"
   ];
 
+  const handleTextChange = useCallback(() => {
+    setCurrentTextIndex((prev) => (prev + 1) % messages.length);
+    // Trigger cloud state when text changes
+    if (onStateChange) {
+      onStateChange('cloud');
+      // Reset to idle after 1 second
+      setTimeout(() => {
+        onStateChange('idle');
+      }, 1000);
+    }
+  }, [messages.length, onStateChange]);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTextIndex((prev) => (prev + 1) % messages.length);
-      // Trigger cloud state when text changes
-      if (onStateChange) {
-        onStateChange('cloud');
-        // Reset to idle after 1 second
-        setTimeout(() => {
-          onStateChange('idle');
-        }, 1000);
-      }
-    }, 3000); // Change text every 3 seconds
+    const interval = setInterval(handleTextChange, 4000); // Increased from 3000ms to 4000ms
 
     return () => clearInterval(interval);
-  }, [messages.length, onStateChange]);
+  }, [handleTextChange]);
 
   return (
     <div className="fixed bottom-16 sm:bottom-20 md:bottom-24 right-2 sm:right-4 md:right-6 pointer-events-none z-50">
@@ -42,7 +44,7 @@ const FloatingTextClouds = ({ onStateChange }) => {
           initial={{ opacity: 0, x: -20, scale: 0.8 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           exit={{ opacity: 0, x: -20, scale: 0.8 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }} // Reduced from 0.5
           className="absolute bottom-12 sm:bottom-16 md:bottom-20 right-full transform translate-x-1 sm:translate-x-2 -translate-y-1/2"
         >
           <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 sm:px-4 py-3 sm:py-2 max-w-[80px] sm:max-w-[120px] md:max-w-full shadow-lg border border-gray-200 floating-cloud">
