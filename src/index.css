@@ -149,3 +149,144 @@ input, textarea, select {
     transition-duration: 0.1s !important;
   }
 }
+
+/* Vertical Timeline Component Styles */
+.vertical-timeline {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.vertical-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: rgba(162, 89, 255, 0.3);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.vertical-timeline-element {
+  position: relative;
+  margin: 2em 0;
+  z-index: 2;
+}
+
+.vertical-timeline-element-content {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
+  background: rgba(30, 30, 60, 0.25);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 24px 0 rgba(0,0,0,0.18);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  color: #fff;
+  transition: all 0.3s cubic-bezier(.4,2,.3,1);
+}
+
+.vertical-timeline-element:nth-child(odd) .vertical-timeline-element-content {
+  margin-left: 0;
+  margin-right: 55%;
+}
+
+.vertical-timeline-element:nth-child(even) .vertical-timeline-element-content {
+  margin-left: 55%;
+  margin-right: 0;
+}
+
+.vertical-timeline-element-icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(162,89,255,0.4) 0%, rgba(56,178,172,0.2) 100%);
+  border: 3px solid rgba(255,255,255,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  z-index: 3;
+  transition: all 0.3s cubic-bezier(.4,2,.3,1);
+}
+
+.vertical-timeline-element-date {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 30, 60, 0.8);
+  color: #a855f7;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Mobile responsive styles for timeline */
+@media (max-width: 768px) {
+  .vertical-timeline::before {
+    left: 20px;
+    transform: none;
+  }
+  
+  .vertical-timeline-element-content {
+    width: calc(100% - 60px);
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+  
+  .vertical-timeline-element:nth-child(odd) .vertical-timeline-element-content,
+  .vertical-timeline-element:nth-child(even) .vertical-timeline-element-content {
+    margin-left: 60px !important;
+    margin-right: 0 !important;
+  }
+  
+  .vertical-timeline-element-icon {
+    left: 20px;
+    transform: none;
+  }
+  
+  .vertical-timeline-element-date {
+    left: 20px;
+    transform: none;
+    margin-top: 50px;
+  }
+}
+
+/* Ensure timeline is visible */
+#timeline {
+  min-height: 100vh;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Fix for any potential display issues */
+.vertical-timeline-element {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.vertical-timeline-element-content {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

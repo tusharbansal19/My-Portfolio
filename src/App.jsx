@@ -141,15 +141,20 @@ function App() {
         
         {/* Timeline Section */}
         <Element name="timeline" className="element">
-          <motion.section 
-            id="timeline"
-            variants={sectionVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <TimelineComponent />
-          </motion.section>
+          <Suspense fallback={<SectionLoader />}>
+            <motion.section 
+              id="timeline"
+              variants={sectionVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              onViewportEnter={() => {
+                setActiveSection('timeline');
+              }}
+            >
+              <TimelineComponent />
+            </motion.section>
+          </Suspense>
         </Element>
         
         <Element name="skills" className="element">

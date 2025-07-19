@@ -13,8 +13,19 @@ const TimelineComponent = ({ darkMode = true }) => {
   // Debug logging
   useEffect(() => {
     console.log('TimelineComponent mounted');
+    console.log('Timeline section element:', document.getElementById('timeline'));
     setIsLoaded(true);
-  }, []);
+    
+    // Fallback: Force visibility after 2 seconds if not visible
+    const fallbackTimer = setTimeout(() => {
+      if (!isVisible) {
+        console.log('Forcing timeline visibility due to fallback');
+        setIsVisible(true);
+      }
+    }, 2000);
+    
+    return () => clearTimeout(fallbackTimer);
+  }, [isVisible]);
 
   // Mouse tracking for interactive effects
   useEffect(() => {
@@ -44,7 +55,10 @@ const TimelineComponent = ({ darkMode = true }) => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px' // Trigger when 100px from bottom
+      }
     );
 
     if (sectionRef.current) {
@@ -142,6 +156,7 @@ const TimelineComponent = ({ darkMode = true }) => {
   return (
     <section 
       ref={sectionRef}
+      id="timeline"
       className="min-h-screen py-16 px-4 relative overflow-hidden"
       style={{
         background: 'transparent',
@@ -149,19 +164,10 @@ const TimelineComponent = ({ darkMode = true }) => {
         position: 'relative'
       }}
     >
-      {/* Test section to ensure visibility */}
-      <div className="bg-red-500 text-white p-4 mb-8 text-center">
-        <h3 className="text-xl font-bold">TIMELINE SECTION IS LOADED!</h3>
-        <p>If you can see this, the TimelineComponent is working.</p>
-        <p>Visible: {isVisible ? 'Yes' : 'No'} | Loaded: {isLoaded ? 'Yes' : 'No'}</p>
+      {/* Visibility indicator - remove in production */}
+      <div className="fixed top-4 left-4 bg-green-500 text-white px-3 py-1 rounded text-sm z-50">
+        Timeline: {isVisible ? 'Visible' : 'Hidden'} | Loaded: {isLoaded ? 'Yes' : 'No'}
       </div>
-
-      {/* Debug info - remove in production */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="fixed top-20 right-4 bg-black/80 text-white p-2 rounded text-xs z-50">
-          Timeline: {isVisible ? 'Visible' : 'Hidden'} | Loaded: {isLoaded ? 'Yes' : 'No'}
-        </div>
-      )}
 
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">
