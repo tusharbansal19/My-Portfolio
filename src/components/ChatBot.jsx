@@ -11,8 +11,8 @@ const ChatBot = () => {
       // Simulate processing delay
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      // Get bot response using the logic component
-      const botResponse = chatBotLogic.getBotResponse(userInput);
+      // Get bot response using the logic component (await the async function)
+      const botResponse = await chatBotLogic.getBotResponse(userInput);
       
       return botResponse;
     } catch (error) {

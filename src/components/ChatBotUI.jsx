@@ -10,6 +10,15 @@ import {
 } from '@heroicons/react/24/outline';
 import FloatingTextClouds from './FloatingTextClouds';
 
+const QUICK_LINKS = [
+  { label: 'Skills', section: 'skills' },
+  { label: 'Projects', section: 'projects' },
+  { label: 'Contact', section: 'contact' },
+  { label: 'About', section: 'about' },
+  { label: 'Timeline', section: 'timeline' },
+  { label: 'Achievements', section: 'achievements' },
+];
+
 const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
@@ -25,6 +34,8 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
       timestamp: new Date()
     }
   ]);
+  const [botResponseCount, setBotResponseCount] = useState(0);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -267,6 +278,99 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
     if (onClose) onClose();
   };
 
+  // Reset chat function
+  const resetChat = () => {
+    setMessages([
+      {
+        id: 1,
+        type: 'bot',
+        text: initialBotMessage(),
+        timestamp: new Date(),
+        isInitial: true
+      }
+    ]);
+    setBotResponseCount(0);
+    setInputText('');
+    setIsTyping(false);
+    setRobotState('idle');
+  };
+
+  // Helper to get initial bot message with quick links
+  function initialBotMessage() {
+    return (
+      <span>
+        Hi! I'm Tushar's AI assistant. I can help you learn about his skills, projects, experience, and more.<br/>
+        <b>Quick Links:</b>
+        <div className="flex flex-wrap gap-2 mt-2">
+          {QUICK_LINKS.map(link => (
+            <button
+              key={link.section}
+              className="px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-xs font-semibold border border-purple-200 transition"
+              onClick={() => handleQuickLink(link.section)}
+              style={{marginRight: 4, marginBottom: 4}}
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+        <br/>
+        I can also navigate you to different sections of the portfolio! Just ask me anything or click a link above.
+      </span>
+    );
+  }
+
+  // On mount, set initial message with quick links
+  useEffect(() => {
+    if (messages.length === 1 && messages[0].type === 'bot' && !messages[0].isInitial) {
+      setMessages([
+        {
+          id: 1,
+          type: 'bot',
+          text: initialBotMessage(),
+          timestamp: new Date(),
+          isInitial: true
+        }
+      ]);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  // Handle quick link click
+  const handleQuickLink = (section) => {
+    // Add user message for navigation
+    const userMessage = {
+      id: Date.now(),
+      type: 'user',
+      text: `Go to ${section} section`,
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, userMessage]);
+    setIsTyping(true);
+    setRobotState('navigating');
+    // Simulate bot response
+    setTimeout(async () => {
+      const botResponse = await onSendMessage(`Go to ${section}`);
+      const botMessage = {
+        id: Date.now() + 1,
+        type: 'bot',
+        text: botResponse.text,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, botMessage]);
+      setIsTyping(false);
+      setBotResponseCount(count => count + 1);
+      setTimeout(() => setRobotState('idle'), 500);
+    }, 600);
+  };
+
+  // Update bot response count on new bot message
+  useEffect(() => {
+    if (messages.length > 1 && messages[messages.length - 1].type === 'bot') {
+      setBotResponseCount(count => count + 1);
+    }
+    // eslint-disable-next-line
+  }, [messages]);
+
   // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -417,17 +521,26 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={handleCloseChat}
-                className="p-1 hover:bg-white/20 rounded-full transition-colors"
-              >
-                <motion.div
-                  whileHover={{ rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowResetConfirm(true)}
+                  className="p-1 bg-white/20 hover:bg-white/40 rounded-full transition-colors text-xs font-semibold border border-white/30 mr-1"
+                  title="Reset Chat"
                 >
-                  <XMarkIcon className="w-5 h-5" />
-                </motion.div>
-              </button>
+                  Reset
+                </button>
+                <button
+                  onClick={handleCloseChat}
+                  className="p-1 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <motion.div
+                    whileHover={{ rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <XMarkIcon className="w-5 h-5" />
+                  </motion.div>
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
@@ -546,6 +659,20 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
               <div ref={messagesEndRef} />
             </div>
 
+            {botResponseCount >= 10 && (
+              <div className="flex flex-col items-center my-4">
+                <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded mb-2 text-xs font-semibold border border-yellow-300">
+                  You have reached 10 bot responses. For a fresh start, please reset the chat.
+                </div>
+                <button
+                  onClick={() => setShowResetConfirm(true)}
+                  className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full shadow hover:scale-105 transition-all text-xs font-bold"
+                >
+                  Reset Chat
+                </button>
+              </div>
+            )}
+
             {/* Input */}
             <div className="p-4 border-t border-gray-200">
               <div className="flex items-center gap-2">
@@ -588,6 +715,28 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      {showResetConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-xl shadow-lg p-6 max-w-xs w-full flex flex-col items-center">
+            <div className="text-lg font-semibold mb-2 text-gray-800">Reset Chat?</div>
+            <div className="text-sm text-gray-600 mb-4 text-center">Are you sure you want to reset the chat? This will clear all messages.</div>
+            <div className="flex gap-3">
+              <button
+                className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full font-bold shadow hover:scale-105 transition-all text-xs"
+                onClick={() => { setShowResetConfirm(false); resetChat(); }}
+              >
+                Yes, Reset
+              </button>
+              <button
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-full font-bold shadow hover:scale-105 transition-all text-xs"
+                onClick={() => setShowResetConfirm(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
