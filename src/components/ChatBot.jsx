@@ -382,54 +382,71 @@ If you have a specific question that I can't answer, please visit the Contact se
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
 
+    // Store the input text before clearing it
+    const currentInputText = inputText;
+
+    // Create user message
     const userMessage = {
       id: Date.now(),
       type: 'user',
-      text: inputText,
+      text: currentInputText,
       timestamp: new Date()
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    // Immediately clear input and add user message to chat
     setInputText('');
+    await setMessages(prev => [...prev, userMessage]);
+    // await new Promise(resolve => setTimeout(resolve, 10));
+    
+    // Focus back on input field
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+    
+    // Immediately show typing indicator
     setIsTyping(true);
     
     // Check if it's a complex query that needs thinking
-    const isComplexQuery = inputText.toLowerCase().includes('how') || 
-                          inputText.toLowerCase().includes('why') || 
-                          inputText.toLowerCase().includes('explain') ||
-                          inputText.toLowerCase().includes('what is') ||
-                          inputText.toLowerCase().includes('tell me about');
+    const isComplexQuery = currentInputText.toLowerCase().includes('how') || 
+                          currentInputText.toLowerCase().includes('why') || 
+                          currentInputText.toLowerCase().includes('explain') ||
+                          currentInputText.toLowerCase().includes('what is') ||
+                          currentInputText.toLowerCase().includes('tell me about');
     
+    // Set robot state immediately
     setRobotState(isComplexQuery ? 'thinking' : 'typing');
 
-    // Show thinking state when processing response
-    setTimeout(() => {
-      setRobotState('thinking');
+    try {
+      // Use async/await for better control
+      await new Promise(resolve => setTimeout(resolve, 10)); // Show typing for 800ms
       
-      // Simulate bot response delay
-      setTimeout(() => {
-        const botResponse = getBotResponse(inputText);
-        const botMessage = {
-          id: Date.now() + 1,
-          type: 'bot',
-          text: botResponse.text,
-          timestamp: new Date()
-        };
+      const botResponse = getBotResponse(currentInputText);
+      const botMessage = {
+        id: Date.now() + 1,
+        type: 'bot',
+        text: botResponse.text,
+        timestamp: new Date()
+      };
 
-        setMessages(prev => [...prev, botMessage]);
-        setIsTyping(false);
-        
-        // Handle navigation if requested
-        if (botResponse.action === 'navigate' && botResponse.section) {
-          handleNavigation(botResponse.section);
-        }
-        
-        // Reset to idle after a short delay
-        setTimeout(() => {
-          setRobotState('idle');
-        }, 500);
-      }, 800);
-    }, 200);
+      // Add bot message and stop typing
+      setMessages(prev => [...prev, botMessage]);
+      setIsTyping(false);
+      
+      // Handle navigation if requested
+      if (botResponse.action === 'navigate' && botResponse.section) {
+        handleNavigation(botResponse.section);
+      }
+      
+      // Reset to idle after a short delay
+      setTimeout(() => {
+        setRobotState('idle');
+      }, 500);
+      
+    } catch (error) {
+      console.error('Error processing bot response:', error);
+      setIsTyping(false);
+      setRobotState('idle');
+    }
   };
 
   // Handle navigation to different sections
@@ -482,12 +499,72 @@ If you have a specific question that I can't answer, please visit the Contact se
       const transcript = event.results[0][0].transcript;
       setInputText(transcript);
       setIsListening(false);
-      // Keep listening state for a moment, then go to idle
-      setTimeout(() => {
-        if (!isTyping && !isSpeaking) {
-          setRobotState('idle');
+      setRobotState('idle');
+      
+      // Automatically send the message after voice input
+      setTimeout(async () => {
+        if (transcript.trim()) {
+          // Store the transcript before clearing
+          const voiceInputText = transcript;
+          
+          const userMessage = {
+            id: Date.now(),
+            type: 'user',
+            text: voiceInputText,
+            timestamp: new Date()
+          };
+
+          // Immediately clear input and add user message to chat
+          setInputText('');
+          setMessages(prev => [...prev, userMessage]);
+          
+          // Focus back on input field
+          setTimeout(() => {
+            inputRef.current?.focus();
+          }, 0);
+          
+          // Show typing indicator
+          setIsTyping(true);
+          
+          // Check if it's a complex query
+          const isComplexQuery = voiceInputText.toLowerCase().includes('how') || 
+                                voiceInputText.toLowerCase().includes('why') || 
+                                voiceInputText.toLowerCase().includes('explain') ||
+                                voiceInputText.toLowerCase().includes('what is') ||
+                                voiceInputText.toLowerCase().includes('tell me about');
+          
+          setRobotState(isComplexQuery ? 'thinking' : 'typing');
+
+          try {
+            // Use async/await for better control
+            await new Promise(resolve => setTimeout(resolve, 800)); // Show typing for 800ms
+            
+            const botResponse = getBotResponse(voiceInputText);
+            const botMessage = {
+              id: Date.now() + 1,
+              type: 'bot',
+              text: botResponse.text,
+              timestamp: new Date()
+            };
+
+            setMessages(prev => [...prev, botMessage]);
+            setIsTyping(false);
+            
+            if (botResponse.action === 'navigate' && botResponse.section) {
+              handleNavigation(botResponse.section);
+            }
+            
+            setTimeout(() => {
+              setRobotState('idle');
+            }, 500);
+            
+          } catch (error) {
+            console.error('Error processing bot response:', error);
+            setIsTyping(false);
+            setRobotState('idle');
+          }
         }
-      }, 500);
+      }, 100);
     };
 
     recognition.onerror = () => {
@@ -545,7 +622,7 @@ If you have a specific question that I can't answer, please visit the Contact se
   // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, isTyping]);
 
   // Handle Enter key
   const handleKeyPress = (e) => {
@@ -783,20 +860,30 @@ If you have a specific question that I can't answer, please visit the Contact se
               
               {isTyping && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, y: 20, x: -20 }}
                   animate={{ 
                     opacity: 1, 
-                    scale: 1,
+                    y: 0, 
+                    x: 0,
                     transition: {
                       type: "spring",
-                      stiffness: 300,
+                      stiffness: 200,
                       damping: 20
                     }
                   }}
-                  className="flex justify-start"
+                  className="flex justify-start items-end gap-2"
                 >
+                  {/* Robot image for typing indicator */}
+                  <div className="flex-shrink-0 w-8 h-8">
+                    <img 
+                      src="/image/robot-3.png" 
+                      alt="AI Assistant Typing" 
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  
                   <motion.div 
-                    className="bg-gray-100 text-gray-800 p-3 rounded-2xl"
+                    className="bg-gray-100 text-gray-800 p-3 rounded-2xl max-w-[80%]"
                     animate={{
                       boxShadow: [
                         "0 0 0 0 rgba(147, 51, 234, 0.4)",
@@ -810,22 +897,25 @@ If you have a specific question that I can't answer, please visit the Contact se
                       ease: "easeInOut"
                     }}
                   >
-                    <div className="flex space-x-1">
-                      <motion.div 
-                        className="w-2 h-2 bg-purple-500 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-                      />
-                      <motion.div 
-                        className="w-2 h-2 bg-purple-500 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-                      />
-                      <motion.div 
-                        className="w-2 h-2 bg-purple-500 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
-                      />
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xs text-gray-500 mr-2">AI is typing</span>
+                      <div className="flex space-x-1">
+                        <motion.div 
+                          className="w-2 h-2 bg-purple-500 rounded-full"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                        />
+                        <motion.div 
+                          className="w-2 h-2 bg-purple-500 rounded-full"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                        />
+                        <motion.div 
+                          className="w-2 h-2 bg-purple-500 rounded-full"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                        />
+                      </div>
                     </div>
                   </motion.div>
                 </motion.div>
