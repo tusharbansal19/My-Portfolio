@@ -23,28 +23,33 @@ class ChatBotLogic {
         databases: ["MongoDB", "MySQL", "Firebase"],
         deployment: ["Vercel", "Netlify", "Heroku", "Railway"]
       },
-      projects: [
+       projects: [
         {
-          name: "E-Commerce Platform",
-          tech: ["React", "Node.js", "MongoDB", "Stripe"],
-          description: "Full-stack e-commerce platform with payment integration"
+          name: "Dynamic Typing Web App",
+          tech: ["React 18", "Node.js", "MongoDB", "Express.js", "Tailwind CSS", "Redux", "Socket.IO"],
+          description: "Real-time typing platform with collaborative sessions, socket-based live tracking, and interactive UI",
+          link: "https://typing-webapp-frountend.onrender.com/"
         },
         {
-          name: "Task Management App",
-          tech: ["React", "Firebase", "Material-UI"],
-          description: "Real-time task management with drag-and-drop functionality"
+          name: "Task Manager Web App",
+          tech: ["React", "Node.js", "Express.js", "Tailwind CSS"],
+          description: "Full-stack task management system with real-time sync, CRUD, and responsive collaborative boards",
+          link: "https://t-task-management.onrender.com/"
         },
         {
-          name: "Weather Dashboard",
-          tech: ["React", "OpenWeather API", "Chart.js"],
-          description: "Interactive weather dashboard with charts and forecasts"
+          name: "GrabEats – E-commerce Platform",
+          tech: ["React", "Next.js", "Node.js", "MongoDB", "D3.js", "WebRTC", "Tailwind CSS"],
+          description: "Real-time food ordering system with OTP login, live order tracking, multi-image support, and secure payments",
+          link: "https://grabeats.onrender.com/"
         },
         {
-          name: "Portfolio Website",
-          tech: ["React", "Framer Motion", "Tailwind CSS"],
-          description: "Modern portfolio with smooth animations and responsive design"
+          name: "Tushar Automobiles – Auto Parts E-commerce",
+          tech: ["Next.js", "Prisma", "React", "Tailwind CSS"],
+          description: "Auto parts e-commerce website with advanced filtering, SSR, mobile-first layout, and modern UI",
+          link: "https://automobiles-next.onrender.com"
         }
       ],
+      
       achievements: [
         "50+ projects completed",
         "2+ years of development experience",
@@ -119,7 +124,7 @@ Tushar, my master, has mastered all these technologies and can build anything yo
         response: `I've worked on ${this.portfolioData.projects.length} major projects. Here are some highlights:
 
 ${this.portfolioData.projects.map(project => 
-  `• ${project.name}: ${project.description} (${project.tech.join(', ')})`
+  `• <b>${project.name}</b>: ${project.description} (${project.tech.join(', ')})${project.link ? ` <a href="${project.link}" target="_blank" rel="noopener noreferrer" style="color:#7c3aed;text-decoration:underline;">[Live Demo]</a>` : ''}`
 ).join('\n')}
 
 Each project demonstrates different aspects of full-stack development and problem-solving skills. Tushar, my master, has incredible project management skills!`,
