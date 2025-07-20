@@ -736,8 +736,19 @@ If you have a specific question that I can't answer, please visit the Contact se
                       delay: index * 0.1
                     }
                   }}
-                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} items-end gap-2`}
                 >
+                  {/* Robot image for bot messages */}
+                  {message.type === 'bot' && (
+                    <div className="flex-shrink-0 w-8 h-8">
+                      <img 
+                        src="/image/robot-2.png" 
+                        alt="AI Assistant" 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  )}
+                  
                   <div
                     className={`max-w-[80%] p-3 rounded-2xl ${
                       message.type === 'user'
