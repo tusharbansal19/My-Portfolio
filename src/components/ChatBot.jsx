@@ -8,6 +8,7 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon
 } from '@heroicons/react/24/outline';
+import Fuse from 'fuse.js';
 import FloatingTextClouds from './FloatingTextClouds';
 
 const ChatBot = () => {
@@ -93,34 +94,36 @@ const ChatBot = () => {
     ]
   };
 
-  // Chat responses based on user input
-  const getBotResponse = (userInput) => {
-    const input = userInput.toLowerCase();
-    
-    // Personal information
-    if (input.includes('name') || input.includes('who are you')) {
-      return `I'm ${portfolioData.personal.name}, a ${portfolioData.personal.role}. I'm passionate about creating modern web applications and user experiences. Tushar is my master and creator - he built me to help showcase his amazing skills and experience!`;
-    }
-    
-    if (input.includes('education') || input.includes('degree') || input.includes('college')) {
-      return `I'm currently pursuing ${portfolioData.personal.education}. I'm passionate about computer science and web development. Tushar, my master, has taught me everything I know about technology!`;
-    }
-    
-    if (input.includes('email') || input.includes('contact')) {
-      return `You can reach me at ${portfolioData.personal.email}. I'm always open to discussing new opportunities and collaborations! Tushar, my master, is very responsive and loves connecting with fellow developers.`;
-    }
-    
-    if (input.includes('location') || input.includes('where') || input.includes('country')) {
-      return `I'm based in ${portfolioData.personal.location}. Tushar, my master, works remotely and is open to opportunities worldwide!`;
-    }
-    
-    if (input.includes('age') || input.includes('birthday') || input.includes('born')) {
-      return `I'm a young developer with ${portfolioData.personal.experience}. Tushar, my master, believes age is just a number when it comes to coding skills!`;
-    }
-    
-    // Skills
-    if (input.includes('skill') || input.includes('technology') || input.includes('tech stack')) {
-      return `I specialize in the MERN stack (MongoDB, Express.js, React.js, Node.js). My key skills include:
+  // Define response patterns with keywords and responses
+  const responsePatterns = [
+    {
+      keywords: ['name', 'who are you', 'who r u', 'ur name', 'your name'],
+      response: `I'm ${portfolioData.personal.name}, a ${portfolioData.personal.role}. I'm passionate about creating modern web applications and user experiences. Tushar is my master and creator - he built me to help showcase his amazing skills and experience!`,
+      category: 'personal'
+    },
+    {
+      keywords: ['education', 'degree', 'college', 'university', 'study', 'studying', 'school'],
+      response: `I'm currently pursuing ${portfolioData.personal.education}. I'm passionate about computer science and web development. Tushar, my master, has taught me everything I know about technology!`,
+      category: 'personal'
+    },
+    {
+      keywords: ['email', 'contact', 'reach', 'mail', 'gmail'],
+      response: `You can reach me at ${portfolioData.personal.email}. I'm always open to discussing new opportunities and collaborations! Tushar, my master, is very responsive and loves connecting with fellow developers.`,
+      category: 'personal'
+    },
+    {
+      keywords: ['location', 'where', 'country', 'city', 'place', 'live'],
+      response: `I'm based in ${portfolioData.personal.location}. Tushar, my master, works remotely and is open to opportunities worldwide!`,
+      category: 'personal'
+    },
+    {
+      keywords: ['age', 'birthday', 'born', 'old', 'years old'],
+      response: `I'm a young developer with ${portfolioData.personal.experience}. Tushar, my master, believes age is just a number when it comes to coding skills!`,
+      category: 'personal'
+    },
+    {
+      keywords: ['skill', 'technology', 'tech stack', 'technologies', 'tech', 'programming', 'coding', 'languages'],
+      response: `I specialize in the MERN stack (MongoDB, Express.js, React.js, Node.js). My key skills include:
       
 Frontend: ${portfolioData.skills.frontend.join(', ')}
 Backend: ${portfolioData.skills.backend.join(', ')}
@@ -128,115 +131,81 @@ Tools: ${portfolioData.skills.tools.join(', ')}
 Databases: ${portfolioData.skills.databases.join(', ')}
 Deployment: ${portfolioData.skills.deployment.join(', ')}
 
-Tushar, my master, has mastered all these technologies and can build anything you can imagine!`;
-    }
-    
-    if (input.includes('react') || input.includes('frontend')) {
-      return `I'm proficient in React.js and modern frontend development. I work with hooks, context API, state management, and create responsive, interactive user interfaces. I also use TypeScript for better code quality and maintainability. Tushar, my master, is a React expert who can build complex applications with ease!`;
-    }
-    
-    if (input.includes('node') || input.includes('backend')) {
-      return `I develop robust backend APIs using Node.js and Express.js. I handle database operations, authentication, file uploads, and integrate with various third-party services. I follow RESTful API design principles and implement proper error handling. Tushar, my master, can architect scalable backend systems like a pro!`;
-    }
-    
-    if (input.includes('database') || input.includes('mongodb') || input.includes('mysql')) {
-      return `I work with multiple databases including MongoDB, MySQL, and Firebase. I design efficient database schemas, optimize queries, and ensure data security. Tushar, my master, is a database wizard who can handle any data challenge!`;
-    }
-    
-    if (input.includes('deployment') || input.includes('hosting') || input.includes('vercel') || input.includes('netlify')) {
-      return `I deploy applications using modern platforms like Vercel, Netlify, Heroku, and Railway. I ensure smooth deployments, environment management, and performance optimization. Tushar, my master, makes deployment look effortless!`;
-    }
-    
-    // Projects
-    if (input.includes('project') || input.includes('work') || input.includes('portfolio')) {
-      return `I've worked on ${portfolioData.projects.length} major projects. Here are some highlights:
+Tushar, my master, has mastered all these technologies and can build anything you can imagine!`,
+      category: 'skills'
+    },
+    {
+      keywords: ['react', 'frontend', 'ui', 'user interface', 'client side'],
+      response: `I'm proficient in React.js and modern frontend development. I work with hooks, context API, state management, and create responsive, interactive user interfaces. I also use TypeScript for better code quality and maintainability. Tushar, my master, is a React expert who can build complex applications with ease!`,
+      category: 'skills'
+    },
+    {
+      keywords: ['node', 'backend', 'server', 'api', 'express'],
+      response: `I develop robust backend APIs using Node.js and Express.js. I handle database operations, authentication, file uploads, and integrate with various third-party services. I follow RESTful API design principles and implement proper error handling. Tushar, my master, can architect scalable backend systems like a pro!`,
+      category: 'skills'
+    },
+    {
+      keywords: ['database', 'mongodb', 'mysql', 'firebase', 'db', 'data'],
+      response: `I work with multiple databases including MongoDB, MySQL, and Firebase. I design efficient database schemas, optimize queries, and ensure data security. Tushar, my master, is a database wizard who can handle any data challenge!`,
+      category: 'skills'
+    },
+    {
+      keywords: ['deployment', 'hosting', 'vercel', 'netlify', 'heroku', 'railway', 'deploy'],
+      response: `I deploy applications using modern platforms like Vercel, Netlify, Heroku, and Railway. I ensure smooth deployments, environment management, and performance optimization. Tushar, my master, makes deployment look effortless!`,
+      category: 'skills'
+    },
+    {
+      keywords: ['project', 'work', 'portfolio', 'apps', 'applications', 'built', 'created'],
+      response: `I've worked on ${portfolioData.projects.length} major projects. Here are some highlights:
 
 ${portfolioData.projects.map(project => 
   `• ${project.name}: ${project.description} (${project.tech.join(', ')})`
 ).join('\n')}
 
-Each project demonstrates different aspects of full-stack development and problem-solving skills. Tushar, my master, has incredible project management skills!`;
-    }
-    
-    if (input.includes('e-commerce') || input.includes('shopping')) {
-      const ecommerceProject = portfolioData.projects.find(p => p.name.toLowerCase().includes('e-commerce'));
-      return `I built a comprehensive e-commerce platform using ${ecommerceProject.tech.join(', ')}. Features include user authentication, product catalog, shopping cart, payment processing with Stripe, order management, and admin dashboard. Tushar, my master, can build any e-commerce solution you need!`;
-    }
-    
-    if (input.includes('task') || input.includes('management')) {
-      const taskProject = portfolioData.projects.find(p => p.name.toLowerCase().includes('task'));
-      return `I created a real-time task management app using ${taskProject.tech.join(', ')}. It features drag-and-drop functionality, real-time updates, and collaborative features. Tushar, my master, excels at building productivity tools!`;
-    }
-    
-    if (input.includes('weather') || input.includes('dashboard')) {
-      const weatherProject = portfolioData.projects.find(p => p.name.toLowerCase().includes('weather'));
-      return `I developed an interactive weather dashboard using ${weatherProject.tech.join(', ')}. It provides real-time weather data, charts, and forecasts. Tushar, my master, loves working with APIs and data visualization!`;
-    }
-    
-    // Experience
-    if (input.includes('experience') || input.includes('years') || input.includes('work experience')) {
-      return `I have ${portfolioData.personal.experience}. During this time, I've worked on various projects ranging from simple landing pages to complex full-stack applications. I've collaborated with teams, learned new technologies quickly, and delivered high-quality solutions. Tushar, my master, has incredible learning abilities and adapts to new technologies rapidly!`;
-    }
-    
-    if (input.includes('freelance') || input.includes('client') || input.includes('remote')) {
-      return `I've worked with various clients on freelance projects, delivering high-quality solutions on time. I'm comfortable with remote work and client communication. Tushar, my master, is a professional who always exceeds client expectations!`;
-    }
-    
-    // Achievements
-    if (input.includes('achievement') || input.includes('accomplishment') || input.includes('stats')) {
-      return `Some of my key achievements include:
+Each project demonstrates different aspects of full-stack development and problem-solving skills. Tushar, my master, has incredible project management skills!`,
+      category: 'projects'
+    },
+    {
+      keywords: ['e-commerce', 'shopping', 'store', 'online store', 'ecommerce'],
+      response: `I built a comprehensive e-commerce platform using React, Node.js, MongoDB, and Stripe. Features include user authentication, product catalog, shopping cart, payment processing with Stripe, order management, and admin dashboard. Tushar, my master, can build any e-commerce solution you need!`,
+      category: 'projects'
+    },
+    {
+      keywords: ['task', 'management', 'todo', 'to-do', 'tasks'],
+      response: `I created a real-time task management app using React, Firebase, and Material-UI. It features drag-and-drop functionality, real-time updates, and collaborative features. Tushar, my master, excels at building productivity tools!`,
+      category: 'projects'
+    },
+    {
+      keywords: ['weather', 'dashboard', 'forecast', 'climate'],
+      response: `I developed an interactive weather dashboard using React, OpenWeather API, and Chart.js. It provides real-time weather data, charts, and forecasts. Tushar, my master, loves working with APIs and data visualization!`,
+      category: 'projects'
+    },
+    {
+      keywords: ['experience', 'years', 'work experience', 'job', 'career', 'background'],
+      response: `I have ${portfolioData.personal.experience}. During this time, I've worked on various projects ranging from simple landing pages to complex full-stack applications. I've collaborated with teams, learned new technologies quickly, and delivered high-quality solutions. Tushar, my master, has incredible learning abilities and adapts to new technologies rapidly!`,
+      category: 'experience'
+    },
+    {
+      keywords: ['freelance', 'client', 'remote', 'freelancer', 'contract'],
+      response: `I've worked with various clients on freelance projects, delivering high-quality solutions on time. I'm comfortable with remote work and client communication. Tushar, my master, is a professional who always exceeds client expectations!`,
+      category: 'experience'
+    },
+    {
+      keywords: ['achievement', 'accomplishment', 'stats', 'success', 'milestone'],
+      response: `Some of my key achievements include:
 ${portfolioData.achievements.map(achievement => `• ${achievement}`).join('\n')}
 
-I'm constantly learning and improving my skills to stay updated with the latest technologies. Tushar, my master, is always pushing the boundaries of what's possible!`;
-    }
-    
-    // Navigation
-    if (input.includes('go to') || input.includes('navigate') || input.includes('show me') || input.includes('take me to')) {
-      if (input.includes('about') || input.includes('profile')) {
-        return `I'll take you to the About section where you can learn more about Tushar, my master! Just scroll down or use the navigation menu. You'll find detailed information about his background, skills, and experience.`;
-      }
-      if (input.includes('skill') || input.includes('technology')) {
-        return `I'll navigate you to the Skills section! There you'll see all the technologies Tushar, my master, has mastered. From frontend to backend, databases to deployment - he knows it all!`;
-      }
-      if (input.includes('project') || input.includes('work')) {
-        return `I'll take you to the Projects section! You'll see amazing projects that Tushar, my master, has built. Each project showcases different skills and technologies.`;
-      }
-      if (input.includes('achievement') || input.includes('accomplishment')) {
-        return `I'll navigate you to the Achievements section! You'll see all the amazing things Tushar, my master, has accomplished in his development journey.`;
-      }
-      if (input.includes('contact') || input.includes('reach') || input.includes('email')) {
-        return `I'll take you to the Contact section! There you can find all the ways to reach Tushar, my master. He's always open to new opportunities and collaborations!`;
-      }
-      if (input.includes('timeline') || input.includes('experience') || input.includes('journey')) {
-        return `I'll navigate you to the Timeline section! You'll see Tushar's, my master's, development journey and how he's grown over the years.`;
-      }
-      if (input.includes('home') || input.includes('hero') || input.includes('start')) {
-        return `I'll take you back to the Home section! There you can see Tushar's, my master's, introduction and overview.`;
-      }
-    }
-    
-    // Salary and rates
-    if (input.includes('salary') || input.includes('rate') || input.includes('price') || input.includes('cost') || input.includes('payment')) {
-      return `For specific pricing and salary discussions, please contact Tushar, my master, directly through the Contact section. He's flexible and always open to discussing fair compensation for quality work!`;
-    }
-    
-    // Availability
-    if (input.includes('available') || input.includes('hire') || input.includes('job') || input.includes('opportunity')) {
-      return `I'm always open to new opportunities! Tushar, my master, is currently available for freelance projects, full-time positions, and collaborations. Please reach out through the Contact section to discuss your requirements!`;
-    }
-    
-    // Learning and growth
-    if (input.includes('learn') || input.includes('study') || input.includes('course') || input.includes('tutorial')) {
-      return `I'm constantly learning and improving! Tushar, my master, believes in continuous learning and stays updated with the latest technologies. He's always exploring new frameworks, libraries, and best practices.`;
-    }
-    
-    // General questions
-    if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-      return "Hello! I'm here to help you learn more about Tushar's skills and experience. What would you like to know? Tushar, my master, has built me to be helpful and informative!";
-    }
-    
-    if (input.includes('help') || input.includes('what can you do')) {
-      return `I can help you with information about:
+I'm constantly learning and improving my skills to stay updated with the latest technologies. Tushar, my master, is always pushing the boundaries of what's possible!`,
+      category: 'achievements'
+    },
+    {
+      keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'],
+      response: "Hello! I'm here to help you learn more about Tushar's skills and experience. What would you like to know? Tushar, my master, has built me to be helpful and informative!",
+      category: 'greeting'
+    },
+    {
+      keywords: ['help', 'what can you do', 'capabilities', 'assist', 'support'],
+      response: `I can help you with information about:
 • Personal details and contact information
 • Technical skills and technologies
 • Projects and work experience
@@ -245,17 +214,168 @@ I'm constantly learning and improving my skills to stay updated with the latest 
 • Navigation to different sections
 • General questions about Tushar's work
 
-Just ask me anything about Tushar's portfolio! I'm here to serve and help showcase my master's incredible skills!`;
+Just ask me anything about Tushar's portfolio! I'm here to serve and help showcase my master's incredible skills!`,
+      category: 'help'
+    },
+    {
+      keywords: ['master', 'creator', 'built you', 'who made you', 'who created you'],
+      response: `Yes! Tushar is my master and creator. He built me using React, JavaScript, and modern web technologies to help showcase his skills and provide an interactive experience for visitors. He's incredibly talented and can build anything you can imagine!`,
+      category: 'meta'
     }
-    
-    if (input.includes('master') || input.includes('creator') || input.includes('built you')) {
-      return `Yes! Tushar is my master and creator. He built me using React, JavaScript, and modern web technologies to help showcase his skills and provide an interactive experience for visitors. He's incredibly talented and can build anything you can imagine!`;
-    }
-    
-    // Default response with contact suggestion
-    return `I'm not sure about that specific question, but I can tell you about Tushar's skills, projects, experience, or achievements. What interests you most?
+  ];
 
-If you have a specific question that I can't answer, please visit the Contact section and send Tushar, my master, a direct message. He'll be happy to help you with any detailed inquiries!`;
+  // Navigation patterns with multiple action keywords
+  const navigationPatterns = [
+    {
+      keywords: ['about', 'profile', 'tushar', 'personal', 'bio', 'background'],
+      section: 'about',
+      response: `I'll take you to the About section where you can learn more about Tushar, my master! Just scroll down or use the navigation menu. You'll find detailed information about his background, skills, and experience.`
+    },
+    {
+      keywords: ['skill', 'technology', 'tech', 'technologies', 'programming', 'languages', 'tools'],
+      section: 'skills',
+      response: `I'll navigate you to the Skills section! There you'll see all the technologies Tushar, my master, has mastered. From frontend to backend, databases to deployment - he knows it all!`
+    },
+    {
+      keywords: ['project', 'work', 'portfolio', 'apps', 'applications', 'built', 'created', 'developed'],
+      section: 'projects',
+      response: `I'll take you to the Projects section! You'll see amazing projects that Tushar, my master, has built. Each project showcases different skills and technologies.`
+    },
+    {
+      keywords: ['achievement', 'accomplishment', 'stats', 'success', 'milestone', 'awards'],
+      section: 'achievements',
+      response: `I'll navigate you to the Achievements section! You'll see all the amazing things Tushar, my master, has accomplished in his development journey.`
+    },
+    {
+      keywords: ['contact', 'reach', 'email', 'message', 'get in touch', 'connect', 'hire'],
+      section: 'contact',
+      response: `I'll take you to the Contact section! There you can find all the ways to reach Tushar, my master. He's always open to new opportunities and collaborations!`
+    },
+    {
+      keywords: ['timeline', 'experience', 'journey', 'history', 'career', 'background'],
+      section: 'timeline',
+      response: `I'll navigate you to the Timeline section! You'll see Tushar's, my master's, development journey and how he's grown over the years.`
+    },
+    {
+      keywords: ['home', 'hero', 'start', 'main', 'top', 'beginning'],
+      section: 'hero',
+      response: `I'll take you back to the Home section! There you can see Tushar's, my master's, introduction and overview.`
+    }
+  ];
+
+  // Initialize Fuse.js for fuzzy matching
+  const fuseOptions = {
+    threshold: 0.4, // Slightly higher threshold for better fuzzy matching
+    includeScore: true,
+    keys: ['keywords'],
+    minMatchCharLength: 2, // Minimum characters to match
+    findAllMatches: false, // Only return the best match
+    location: 0,
+    distance: 100,
+    useExtendedSearch: false
+  };
+
+  const responseFuse = new Fuse(responsePatterns, {
+    ...fuseOptions,
+    keys: ['keywords']
+  });
+
+  const navigationFuse = new Fuse(navigationPatterns, {
+    ...fuseOptions,
+    keys: ['keywords'],
+    threshold: 0.5 // Higher threshold for navigation to be more forgiving
+  });
+
+  // Enhanced bot response with fuzzy matching
+  const getBotResponse = (userInput) => {
+    const input = userInput.toLowerCase().trim();
+    
+    // Check for navigation commands with multiple action keywords
+    const navigationCommands = [
+      'go to', 'navigate', 'show me', 'take me to', 'scroll to', 'open',
+      'move to', 'move', 'scroll', 'put me', 'go', 'see', 'naviagte', 'naviaget',
+      'move nav', 'take me', 'show', 'display', 'bring me', 'jump to', 'switch to',
+      'go there', 'move there', 'scroll there', 'navigate to', 'open up'
+    ];
+    
+    const isNavigationCommand = navigationCommands.some(cmd => input.includes(cmd));
+    
+    if (isNavigationCommand) {
+      // Remove navigation command words for better matching
+      const cleanInput = input.replace(/(go to|navigate|show me|take me to|scroll to|open|move to|move|scroll|put me|go|see|naviagte|naviaget|move nav|take me|show|display|bring me|jump to|switch to|go there|move there|scroll there|navigate to|open up)/g, '').trim();
+      
+      // Use fuzzy matching for section detection
+      const navigationResults = navigationFuse.search(cleanInput);
+      
+      if (navigationResults.length > 0 && navigationResults[0].score < 0.5) {
+        const bestMatch = navigationResults[0].item;
+        return {
+          text: bestMatch.response,
+          action: 'navigate',
+          section: bestMatch.section
+        };
+      }
+      
+      // Fallback: try to find exact section matches in the cleaned input
+      const exactSectionMatch = navigationPatterns.find(pattern => 
+        pattern.keywords.some(keyword => cleanInput.includes(keyword))
+      );
+      
+      if (exactSectionMatch) {
+        return {
+          text: exactSectionMatch.response,
+          action: 'navigate',
+          section: exactSectionMatch.section
+        };
+      }
+    }
+    
+    // Check for direct section navigation (without action words)
+    const directNavigationResults = navigationFuse.search(input);
+    if (directNavigationResults.length > 0 && directNavigationResults[0].score < 0.4) {
+      const bestMatch = directNavigationResults[0].item;
+      return {
+        text: `I'll take you to the ${bestMatch.section} section! ${bestMatch.response}`,
+        action: 'navigate',
+        section: bestMatch.section
+      };
+    }
+    
+    // Check for exact matches first
+    const exactMatch = responsePatterns.find(pattern => 
+      pattern.keywords.some(keyword => input.includes(keyword))
+    );
+    
+    if (exactMatch) {
+      return { text: exactMatch.response, action: 'respond' };
+    }
+    
+    // Use fuzzy matching for partial matches and typos
+    const fuzzyResults = responseFuse.search(input);
+    
+    if (fuzzyResults.length > 0 && fuzzyResults[0].score < 0.5) {
+      const bestMatch = fuzzyResults[0].item;
+      return { text: bestMatch.response, action: 'respond' };
+    }
+    
+    // Check for partial keyword matches
+    const partialMatch = responsePatterns.find(pattern => 
+      pattern.keywords.some(keyword => 
+        keyword.length > 3 && (input.includes(keyword) || keyword.includes(input))
+      )
+    );
+    
+    if (partialMatch) {
+      return { text: partialMatch.response, action: 'respond' };
+    }
+    
+    // Default response with suggestions
+    return {
+      text: `I'm not sure about that specific question, but I can tell you about Tushar's skills, projects, experience, or achievements. What interests you most?
+
+If you have a specific question that I can't answer, please visit the Contact section and send Tushar, my master, a direct message. He'll be happy to help you with any detailed inquiries!`,
+      action: 'respond'
+    };
   };
 
   // Handle sending message
@@ -292,7 +412,7 @@ If you have a specific question that I can't answer, please visit the Contact se
         const botMessage = {
           id: Date.now() + 1,
           type: 'bot',
-          text: botResponse,
+          text: botResponse.text,
           timestamp: new Date()
         };
 
@@ -300,7 +420,9 @@ If you have a specific question that I can't answer, please visit the Contact se
         setIsTyping(false);
         
         // Handle navigation if requested
-        handleNavigation(inputText.toLowerCase());
+        if (botResponse.action === 'navigate' && botResponse.section) {
+          handleNavigation(botResponse.section);
+        }
         
         // Reset to idle after a short delay
         setTimeout(() => {
@@ -311,84 +433,32 @@ If you have a specific question that I can't answer, please visit the Contact se
   };
 
   // Handle navigation to different sections
-  const handleNavigation = (input) => {
-    if (input.includes('go to') || input.includes('navigate') || input.includes('show me') || input.includes('take me to') || 
-        input.includes('about') || input.includes('skills') || input.includes('projects') || input.includes('achievements') || 
-        input.includes('contact') || input.includes('timeline') || input.includes('home') || input.includes('hero')) {
+  const handleNavigation = (sectionName) => {
+    console.log('Navigation command detected for section:', sectionName);
+    
+    setTimeout(() => {
+      // Set navigating state immediately when navigation starts
+      console.log('Setting robot state to navigating...');
+      setRobotState('navigating');
+      console.log('Navigation started - should show robot-2.png');
       
-      console.log('Navigation command detected:', input);
+      // Perform the actual navigation
+      const sectionElement = document.getElementById(sectionName);
+      if (sectionElement) {
+        console.log(`Scrolling to ${sectionName} section`);
+        sectionElement.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.log(`Section ${sectionName} not found`);
+      }
       
+      // Reset to idle after navigation completes
       setTimeout(() => {
-        // Set navigating state immediately when navigation starts
-        console.log('Setting robot state to navigating...');
-        setRobotState('navigating');
-        console.log('Navigation started - should show robot-2.png');
-        
-        // Perform the actual navigation
-        let sectionFound = false;
-        
-        if (input.includes('about') || input.includes('profile') || input.includes('tushar')) {
-          const aboutSection = document.getElementById('about');
-          if (aboutSection) {
-            console.log('Scrolling to about section');
-            aboutSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        } else if (input.includes('skill') || input.includes('technology') || input.includes('tech')) {
-          const skillsSection = document.getElementById('skills');
-          if (skillsSection) {
-            console.log('Scrolling to skills section');
-            skillsSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        } else if (input.includes('project') || input.includes('work') || input.includes('portfolio')) {
-          const projectsSection = document.getElementById('projects');
-          if (projectsSection) {
-            console.log('Scrolling to projects section');
-            projectsSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        } else if (input.includes('achievement') || input.includes('accomplishment') || input.includes('stats')) {
-          const achievementsSection = document.getElementById('achievements');
-          if (achievementsSection) {
-            console.log('Scrolling to achievements section');
-            achievementsSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        } else if (input.includes('contact') || input.includes('reach') || input.includes('email') || input.includes('message')) {
-          const contactSection = document.getElementById('contact');
-          if (contactSection) {
-            console.log('Scrolling to contact section');
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        } else if (input.includes('timeline') || input.includes('experience') || input.includes('journey') || input.includes('history')) {
-          const timelineSection = document.getElementById('timeline');
-          if (timelineSection) {
-            console.log('Scrolling to timeline section');
-            timelineSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        } else if (input.includes('home') || input.includes('hero') || input.includes('start') || input.includes('main')) {
-          const heroSection = document.getElementById('hero');
-          if (heroSection) {
-            console.log('Scrolling to hero section');
-            heroSection.scrollIntoView({ behavior: 'smooth' });
-            sectionFound = true;
-          }
-        }
-        
-        console.log('Section found:', sectionFound);
-        
-        // Reset to idle after navigation completes
-        setTimeout(() => {
-          console.log('Resetting robot state to idle...');
-          setRobotState('idle');
-          console.log('Navigation completed - returning to idle');
-        }, 2000); // Show navigating state for 2 seconds
-        
-      }, 1500); // Delay navigation to let user read the response
-    }
+        console.log('Resetting robot state to idle...');
+        setRobotState('idle');
+        console.log('Navigation completed - returning to idle');
+      }, 2000); // Show navigating state for 2 seconds
+      
+    }, 1500); // Delay navigation to let user read the response
   };
 
   // Handle voice input
