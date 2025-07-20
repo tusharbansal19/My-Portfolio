@@ -123,9 +123,7 @@ Tushar, my master, has mastered all these technologies and can build anything yo
         keywords: ['project', 'work', 'portfolio', 'apps', 'applications', 'built', 'created'],
         response: `I've worked on ${this.portfolioData.projects.length} major projects. Here are some highlights:
 
-${this.portfolioData.projects.map(project => 
-  `• <b>${project.name}</b>: ${project.description} (${project.tech.join(', ')})${project.link ? ` <a href="${project.link}" target="_blank" rel="noopener noreferrer" style="color:#7c3aed;text-decoration:underline;">[Live Demo]</a>` : ''}`
-).join('\n')}
+
 
 Each project demonstrates different aspects of full-stack development and problem-solving skills. Tushar, my master, has incredible project management skills!`,
         category: 'projects'
