@@ -42,9 +42,7 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
   };
 
   // Debug robot state changes
-  useEffect(() => {
-    console.log('Robot state changed to:', robotState);
-  }, [robotState]);
+
 
   // Handle sending message
   const handleSendMessage = async () => {
@@ -317,19 +315,7 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
           />
           
           <motion.div
-            animate={{ 
-              boxShadow: [
-                "0 0 0 0 rgba(59, 130, 246, 0.7)",
-                "0 0 0 10px rgba(59, 130, 246, 0)",
-                "0 0 0 0 rgba(59, 130, 246, 0)"
-              ]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute inset-0 rounded-full"
+            className="absolute inset-0 rounded-full animate-pulse-ring"
           />
         </motion.div>
       </motion.button>
@@ -531,19 +517,7 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
                   </div>
                   
                   <motion.div 
-                    className="bg-gray-100 text-gray-800 p-3 rounded-2xl max-w-[80%]"
-                    animate={{
-                      boxShadow: [
-                        "0 0 0 0 rgba(147, 51, 234, 0.4)",
-                        "0 0 0 10px rgba(147, 51, 234, 0)",
-                        "0 0 0 0 rgba(147, 51, 234, 0)"
-                      ]
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
+                    className="bg-gray-100 text-gray-800 p-3 rounded-2xl max-w-[80%] animate-typing-glow"
                   >
                     <div className="flex items-center space-x-2">
                       <span className="text-xs text-gray-500 mr-2">AI is typing</span>

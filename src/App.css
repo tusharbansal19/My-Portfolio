@@ -269,3 +269,31 @@ html {
   background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
   padding: 4px;
 }
+
+/* Pulse ring animation for robot button */
+@keyframes pulse-ring {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* Typing glow animation */
+@keyframes typing-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(147, 51, 234, 0);
+  }
+}
+
+.animate-typing-glow {
+  animation: typing-glow 1.5s ease-in-out infinite;
+}
