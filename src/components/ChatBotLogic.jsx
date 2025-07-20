@@ -181,6 +181,31 @@ Just ask me anything about Tushar's portfolio! I'm here to serve and help showca
         keywords: ['master', 'creator', 'built you', 'who made you', 'who created you'],
         response: `Yes! Tushar is my master and creator. He built me using React, JavaScript, and modern web technologies to help showcase his skills and provide an interactive experience for visitors. He's incredibly talented and can build anything you can imagine!`,
         category: 'meta'
+      },
+      {
+        keywords: ['how are you', 'how r u', 'how do you do', 'how is it going', 'how are things'],
+        response: "I'm just a friendly AI, always happy to help! Tushar programmed me to be positive and helpful. How can I assist you today?",
+        category: 'greeting'
+      },
+      {
+        keywords: ['tell me about', 'about tushar', 'tushar is what', 'who is tushar', 'tell me about tushar', 'about you', 'about yourself'],
+        response: "Tushar Bansal is a passionate Frontend & MERN Stack Developer with 2+ years of experience. He loves building modern web applications and learning new technologies. I can tell you about his skills, projects, education, and more!",
+        category: 'personal'
+      },
+      {
+        keywords: ['nice to meet you', 'pleased to meet you', 'good to meet you'],
+        response: "Nice to meet you too! I'm here to help you explore Tushar's portfolio. Feel free to ask me anything about his work or experience.",
+        category: 'greeting'
+      },
+      {
+        keywords: ['greeting', 'hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
+        response: "Hello! 👋 I'm Tushar's AI assistant. Ask me anything about Tushar's skills, projects, or experience!",
+        category: 'greeting'
+      },
+      {
+        keywords: ['who are you', 'what are you', 'what do you do', 'what is your purpose', 'who made you', 'who created you'],
+        response: "I'm an AI assistant created by Tushar Bansal to help showcase his portfolio and answer your questions about his work, skills, and experience!",
+        category: 'meta'
       }
     ];
 

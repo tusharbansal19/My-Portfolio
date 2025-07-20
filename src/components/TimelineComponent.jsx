@@ -122,7 +122,7 @@ const TimelineComponent = ({ darkMode = true }) => {
   return (
     <section 
       ref={sectionRef}
-      className="min-h-screen py-16 px-4 relative overflow-hidden"
+      className="min-h-screen py-16 px-2 sm:px-4 relative overflow-hidden"
       style={{
         background: 'transparent'
       }}
@@ -156,11 +156,12 @@ const TimelineComponent = ({ darkMode = true }) => {
         <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 mx-auto mt-6 rounded-full" />
       </div>
 
-      {/* Timeline */}
-      <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Timeline - responsive, no horizontal scroll */}
+      <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'} w-full`}>
         <VerticalTimeline
           animate={true}
           lineColor="rgba(162, 89, 255, 0.3)"
+          className="w-full"
         >
           {timelineData.map((item, index) => (
             <VerticalTimelineElement
@@ -212,6 +213,12 @@ const TimelineComponent = ({ darkMode = true }) => {
               onMouseLeave={() => setHoveredElement(null)}
             >
               <div className="relative">
+                {/* Date/Duration Badge */}
+                <div className="absolute -top-6 left-0 right-0 flex justify-center z-10">
+                  <span className="inline-block bg-gradient-to-r from-purple-500 to-cyan-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-md border border-white/20">
+                    {item.date}
+                  </span>
+                </div>
                 {/* Achievement Badge */}
                 <div className="absolute -top-2 -right-2 px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-xs font-bold rounded-full flex items-center gap-1">
                   <FaStar className="text-xs" />
