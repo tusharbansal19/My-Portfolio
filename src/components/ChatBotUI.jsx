@@ -122,26 +122,28 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
   const handleNavigation = (sectionName) => {
     console.log('Navigation command detected for section:', sectionName);
     
+    // Navigate immediately
+    console.log('Setting robot state to navigating...');
+    setRobotState('navigating');
+    console.log('Navigation started - should show robot-2.png');
+    
+    const sectionElement = document.getElementById(sectionName);
+    console.log('Section element found:', sectionElement);
+    
+    if (sectionElement) {
+      console.log(`Scrolling to ${sectionName} section`);
+      sectionElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log(`Section ${sectionName} not found. Available sections:`, 
+        ['hero', 'about', 'timeline', 'skills', 'projects', 'achievements', 'contact']);
+    }
+    
+    // Reset to idle after navigation
     setTimeout(() => {
-      console.log('Setting robot state to navigating...');
-      setRobotState('navigating');
-      console.log('Navigation started - should show robot-2.png');
-      
-      const sectionElement = document.getElementById(sectionName);
-      if (sectionElement) {
-        console.log(`Scrolling to ${sectionName} section`);
-        sectionElement.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        console.log(`Section ${sectionName} not found`);
-      }
-      
-      setTimeout(() => {
-        console.log('Resetting robot state to idle...');
-        setRobotState('idle');
-        console.log('Navigation completed - returning to idle');
-      }, 2000);
-      
-    }, 1500);
+      console.log('Resetting robot state to idle...');
+      setRobotState('idle');
+      console.log('Navigation completed - returning to idle');
+    }, 2000);
   };
 
   // Handle voice input
@@ -337,6 +339,11 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
 
   // Handle quick link click
   const handleQuickLink = (section) => {
+    console.log('Quick link clicked for section:', section);
+    
+    // Navigate immediately
+    handleNavigation(section);
+    
     // Add user message for navigation
     const userMessage = {
       id: Date.now(),
@@ -347,6 +354,7 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
     setRobotState('navigating');
+    
     // Simulate bot response
     setTimeout(async () => {
       const botResponse = await onSendMessage(`Go to ${section}`);
@@ -359,6 +367,7 @@ const ChatBotUI = ({ onSendMessage, onVoiceInput, onSpeak, onClose }) => {
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
       setBotResponseCount(count => count + 1);
+      
       setTimeout(() => setRobotState('idle'), 500);
     }, 600);
   };
