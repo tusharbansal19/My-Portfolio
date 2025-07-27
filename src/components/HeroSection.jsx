@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaDownload } from 'react-icons/fa';
 import { Typewriter } from 'react-simple-typewriter';
+// import { useNavigate } from 'react-router-dom';
 
 const imageMyPhoto = '/Image/myphoto.png';
 
 const  HeroSection = ({ setActiveSection, darkMode }) => {
- 
+  // const navigate = useNavigate();
 
   const handleShowExperience = () => {
     const timelineSection = document.getElementById('timeline');
@@ -13,8 +14,9 @@ const  HeroSection = ({ setActiveSection, darkMode }) => {
   };
 
   const handleContactMe = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    window.open('https://drive.google.com/file/d/1lcFZHZlBfFR8vxv1sizp-P4RbP1rHcYS/view', '_blank');
+    // const contactSection = document.getElementById('contact');
+    // if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

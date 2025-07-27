@@ -87,32 +87,14 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
       {/* Resume View Section (Embedded, view-only, with zoom) */}
       <div className="w-full max-w-lg mb-8 flex flex-col items-center">
         <button
-          onClick={() => setShowResume((prev) => !prev)}
+          onClick={() =>{     window.open('https://drive.google.com/file/d/1lcFZHZlBfFR8vxv1sizp-P4RbP1rHcYS/view', '_blank');
+          }}
           className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 text-white font-bold shadow-lg hover:scale-105 transition-transform mb-2"
         >
           {showResume ? 'Hide Resume' : 'View Resume'}
         </button>
         {/* Zoom controls only show if resume is visible */}
-        {showResume && (
-          <div className="flex gap-2 mb-2">
-            <button
-              onClick={() => setPdfHeight((h) => Math.max(h - 100, 200))}
-              className="p-2 rounded-full bg-purple-900/30 text-purple-200 hover:bg-purple-900/60 transition"
-              aria-label="Zoom Out"
-              type="button"
-            >
-              <FaSearchMinus />
-            </button>
-            <button
-              onClick={() => setPdfHeight((h) => Math.min(h + 100, 1000))}
-              className="p-2 rounded-full bg-purple-900/30 text-purple-200 hover:bg-purple-900/60 transition"
-              aria-label="Zoom In"
-              type="button"
-            >
-              <FaSearchPlus />
-            </button>
-          </div>
-        )}
+      
         {/* Embedded PDF, view-only, no pointer events */}
         {showResume && (
           <div id="resume-embed" className="w-full flex justify-center mt-2" style={{pointerEvents: 'none', userSelect: 'none'}}>
