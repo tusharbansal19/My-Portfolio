@@ -80,8 +80,8 @@ function App() {
   };
   
   return (
-    <div className={`font-sans min-h-screen flex flex-col relative scroll-smooth`}>
-      <StarBackground />/\
+    <div className={`font-sans min-' flex flex-col relative scroll-smooth`}>
+      <StarBackground />
       <NewHeader activeSection={activeSection} setActiveSection={setActiveSection} darkMode={darkMode} setDarkMode={setDarkMode} />
       <main className="flex-1 overflow-y-auto">
         <Element name="hero" className="element">

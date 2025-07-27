@@ -72,16 +72,15 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
         </div>
         {/* Embedded Google Map with new coordinates */}
         <div className="w-full mt-4 rounded-xl overflow-hidden border border-purple-900 shadow-lg" style={{height:'260px', minHeight:'180px', background:'#18122b'}}>
-          <iframe
-            title="AKGEC Map"
-            src="https://www.google.com/maps?q=28.6756736,77.4994292&z=15&output=embed"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4348.121152017592!2d77.5025031!3d28.6784491!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf243a45cd65b%3A0x90f68b9636329241!2sAjay%20Kumar%20Garg%20Engineering%20College%20Amphitheatre!5e1!3m2!1sen!2sin!4v1753603083464!5m2!1sen!2sin" 
+      width="100%" 
+      height="100%" 
+      style={{ border: 0 }} 
+      allowFullScreen="" 
+      loading="lazy" 
+      referrerPolicy="no-referrer-when-downgrade"
+    />
         </div>
       </div>
 
