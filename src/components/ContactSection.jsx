@@ -87,26 +87,15 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
       {/* Resume View Section (Embedded, view-only, with zoom) */}
       <div className="w-full max-w-lg mb-8 flex flex-col items-center">
         <button
-          onClick={() =>{     window.open('https://docs.google.com/document/d/1zt7mpPuFSvC54h1kNjGowrUIHcyGkwf3NjopoytGwgM/edit?usp=sharing', '_blank');
+          onClick={() =>{     window.open('https://drive.google.com/file/d/1kvvsuX5znWMxQ7gZTNU5fvlqVxzLIPLi/view?usp=sharing', '_blank');
           }}
           className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 text-white font-bold shadow-lg hover:scale-105 transition-transform mb-2"
         >
-          {showResume ? 'Hide Resume' : 'View Resume'}
+          {'View Resume'}
         </button>
         {/* Zoom controls only show if resume is visible */}
       
-        {/* Embedded PDF, view-only, no pointer events */}
-        {showResume && (
-          <div id="resume-embed" className="w-full flex justify-center mt-2" style={{pointerEvents: 'none', userSelect: 'none'}}>
-            <iframe
-              src="/tushar-resume..pdf"
-              title="Resume PDF"
-              width="100%"
-              style={{ minHeight: pdfHeight + 'px', height: pdfHeight + 'px', maxHeight: '1000px', border: 'none', borderRadius: '1rem', background: 'rgba(44,20,80,0.5)' }}
-              allow=""
-            />
-          </div>
-        )}
+      
       </div>
 
       <h2 className="text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text">Contact <span className="text-purple-300">Me</span></h2>
