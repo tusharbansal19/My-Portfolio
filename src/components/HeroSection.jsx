@@ -14,7 +14,7 @@ const  HeroSection = ({ setActiveSection, darkMode }) => {
   };
 
   const handleContactMe = () => {
-    window.open('https://drive.google.com/file/d/1lcFZHZlBfFR8vxv1sizp-P4RbP1rHcYS/view', '_blank');
+    window.open('https://docs.google.com/document/d/1zt7mpPuFSvC54h1kNjGowrUIHcyGkwf3NjopoytGwgM/edit?usp=sharing', '_blank');
     // const contactSection = document.getElementById('contact');
     // if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
   };

@@ -87,7 +87,7 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
       {/* Resume View Section (Embedded, view-only, with zoom) */}
       <div className="w-full max-w-lg mb-8 flex flex-col items-center">
         <button
-          onClick={() =>{     window.open('https://drive.google.com/file/d/1lcFZHZlBfFR8vxv1sizp-P4RbP1rHcYS/view', '_blank');
+          onClick={() =>{     window.open('https://docs.google.com/document/d/1zt7mpPuFSvC54h1kNjGowrUIHcyGkwf3NjopoytGwgM/edit?usp=sharing', '_blank');
           }}
           className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 text-white font-bold shadow-lg hover:scale-105 transition-transform mb-2"
         >
