@@ -122,7 +122,7 @@ const TimelineComponent = ({ darkMode = true }) => {
   return (
     <section 
       ref={sectionRef}
-      className="min-h-screen py-16 px-2 sm:px-4 relative overflow-hidden"
+      className="min-h-screen py-10 px-1 sm:px-4 relative overflow-x-hidden overflow-y-visible"
       style={{
         background: 'transparent'
       }}
@@ -157,11 +157,11 @@ const TimelineComponent = ({ darkMode = true }) => {
       </div>
 
       {/* Timeline - responsive, no horizontal scroll */}
-      <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'} w-full`}>
+      <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'} w-full max-w-full overflow-x-auto`}>
         <VerticalTimeline
           animate={true}
           lineColor="rgba(162, 89, 255, 0.3)"
-          className="w-full"
+          className="w-full max-w-full"
         >
           {timelineData.map((item, index) => (
             <VerticalTimelineElement
