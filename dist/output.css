@@ -1748,6 +1748,11 @@ video {
   background-color: rgb(234 179 8 / 0.2);
 }
 
+.bg-\[\#18192a\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 25 42 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -3206,6 +3211,10 @@ video {
   .md\:border-\[\#2d1457\] {
     --tw-border-opacity: 1;
     border-color: rgb(45 20 87 / var(--tw-border-opacity));
+  }
+
+  .md\:bg-transparent {
+    background-color: transparent;
   }
 
   .md\:bg-opacity-0 {

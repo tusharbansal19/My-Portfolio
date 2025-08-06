@@ -122,9 +122,9 @@ const TimelineComponent = ({ darkMode = true }) => {
   return (
     <section 
       ref={sectionRef}
-      className="min-h-screen py-10 px-1 sm:px-4 relative overflow-x-hidden overflow-y-visible"
+      className="min-h-screen py-10 px-1 sm:px-4 relative overflow-x-hidden overflow-y-visible md:bg-transparent"
       style={{
-        background: 'transparent'
+        background: 'transparent',
       }}
     >
       {/* Dynamic background gradient removed for transparency */}
@@ -168,7 +168,7 @@ const TimelineComponent = ({ darkMode = true }) => {
               key={item.id}
               className="vertical-timeline-element"
               contentStyle={{
-                background: 'rgba(30, 30, 60, 0.25)',
+                background: '#23244a',
                 border: hoveredElement === item.id 
                   ? '2px solid rgba(162, 89, 255, 0.7)'
                   : '1.5px solid rgba(255,255,255,0.15)',
@@ -176,8 +176,8 @@ const TimelineComponent = ({ darkMode = true }) => {
                 boxShadow: hoveredElement === item.id 
                   ? '0 0 32px 8px rgba(162, 89, 255, 0.4), 0 2px 32px 0 rgba(0,0,0,0.25)'
                   : '0 2px 24px 0 rgba(0,0,0,0.18)',
-                backdropFilter: 'blur(18px) saturate(160%)',
-                WebkitBackdropFilter: 'blur(18px) saturate(160%)',
+                backdropFilter: 'none',
+                WebkitBackdropFilter: 'none',
                 color: '#fff',
                 transition: 'all 0.3s cubic-bezier(.4,2,.3,1)'
               }}
