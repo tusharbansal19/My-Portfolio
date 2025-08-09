@@ -6,7 +6,7 @@ const achievements = [
   { title: 'Infosys Web Development Certification', description: 'Successfully completed Infosys Web Development Certification.', icon: FaStar },
   { title: '50 & 100 Days LeetCode Badge', description: 'Earned 50 and 100 day badges on LeetCode in 2024.', icon: FaAward },
   { title: 'Mentorship Certificate', description: 'Received DS lecture mentorship certificate from AKGEC.', icon: FaAward },
-  { title: '200+ LeetCode Questions', description: 'Solved over 200 LeetCode questions in 2024.', icon: FaAward },
+  { title: '400+ LeetCode Questions', description: 'Solved over 200 LeetCode questions in 2024.', icon: FaAward },
 ];
 
 const AchievementsSection = ({ setActiveSection, darkMode }) => {
