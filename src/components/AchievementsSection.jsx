@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaAward, FaStar } from 'react-icons/fa';
 
 const achievements = [
@@ -15,7 +14,7 @@ const AchievementsSection = ({ setActiveSection, darkMode }) => {
       <h2 className="text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text animate-gradient-move">My <span className="text-purple-300">Achievements</span></h2>
       {/* Centered Top 3 Achievements */}
       <div className="w-full flex flex-col md:flex-row justify-center items-center gap-4 mb-8">
-        {achievements.slice(0,3).map((ach, idx) => (
+        {achievements.slice(0, 3).map((ach, idx) => (
           <div
             key={ach.title}
             className="flex flex-col items-center p-7 rounded-3xl shadow-2xl glass-effect border-2 border-purple-700 bg-gradient-to-br from-[#2d1457]/80 via-[#a259ff]/10 to-[#18122b]/80 backdrop-blur-xl transition-transform duration-500 hover:scale-105 hover:shadow-purple-500/40 relative animate-fade-in w-full md:w-1/3 max-w-xs"
@@ -35,7 +34,7 @@ const AchievementsSection = ({ setActiveSection, darkMode }) => {
       </div>
       {/* Bottom 2 Achievements */}
       <div className="w-full flex flex-col md:flex-row justify-center items-center gap-4 mb-8">
-        {achievements.slice(3,5).map((ach, idx) => (
+        {achievements.slice(3, 5).map((ach, idx) => (
           <div
             key={ach.title}
             className="flex flex-col items-center p-7 rounded-3xl shadow-2xl glass-effect border-2 border-purple-700 bg-gradient-to-br from-[#2d1457]/80 via-[#a259ff]/10 to-[#18122b]/80 backdrop-blur-xl transition-transform duration-500 hover:scale-105 hover:shadow-purple-500/40 relative animate-fade-in w-full md:w-1/2 max-w-xs"

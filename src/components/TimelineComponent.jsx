@@ -1,5 +1,5 @@
 import React from "react";
-import { Timeline, TimelineItem, TimelineConnector, TimelineHeader, TimelineIcon, TimelineBody, TimelineTime, TimelineTitle } from "flowbite-react";
+import { Timeline, TimelineItem, TimelineBody } from "flowbite-react";
 import { FaSchool, FaGraduationCap, FaUniversity, FaCode, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 
 const TimelineComponent = () => {
@@ -73,25 +73,30 @@ const TimelineComponent = () => {
 
       {/* Timeline */}
       <div className="max-w-4xl mx-auto">
-        <Timeline className="relative">
+        <div className="relative">
           {timelineData.map((item, index) => (
-            <TimelineItem key={index} className="mb-8">
-              <TimelineConnector className="bg-gradient-to-b from-purple-400 to-cyan-400" />
-              <TimelineHeader className="h-3">
-                <TimelineIcon className={`p-3 ${item.bgColor} ${item.borderColor} border-2`}>
+            <div key={index} className="mb-8 flex items-start gap-6">
+              {/* Custom Timeline Icon */}
+              <div className="flex flex-col items-center">
+                <div className={`p-3 ${item.bgColor} ${item.borderColor} border-2 rounded-full flex items-center justify-center`}>
                   <item.icon className={`h-6 w-6 ${item.iconColor}`} />
-                </TimelineIcon>
-                <div className="flex flex-col">
-                  <TimelineTime className="text-purple-300 font-semibold flex items-center gap-2">
+                </div>
+                {index < timelineData.length - 1 && (
+                  <div className="w-0.5 h-16 bg-gradient-to-b from-purple-400 to-cyan-400 mt-4"></div>
+                )}
+              </div>
+              
+              {/* Content */}
+              <div className="flex-1 pb-8">
+                <div className="mb-4">
+                  <div className="text-purple-300 font-semibold flex items-center gap-2 mb-2">
                     <FaCalendarAlt className="text-sm" />
                     {item.year}
-                  </TimelineTime>
-                  <TimelineTitle className="text-xl font-bold text-white">
+                  </div>
+                  <h3 className="text-xl font-bold text-white">
                     {item.title}
-                  </TimelineTitle>
+                  </h3>
                 </div>
-              </TimelineHeader>
-              <TimelineBody className="pb-8">
                 <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-500 shadow-2xl">
                   <div className="flex items-center gap-2 mb-3 text-purple-300">
                     <h4 className="text-base font-semibold">
@@ -122,10 +127,10 @@ const TimelineComponent = () => {
                     </div>
                   )}
                 </div>
-              </TimelineBody>
-            </TimelineItem>
+              </div>
+            </div>
           ))}
-        </Timeline>
+        </div>
       </div>
 
       {/* Stats Summary */}
