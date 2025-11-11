@@ -460,7 +460,7 @@ const ProjectsSection = ({ setActiveSection }) => {
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative">
+    <section className="flex flex-col items-center justify-center gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative">
       {/* Header */}
       <div className="text-center mb-8 lg:mb-12 z-10 max-w-4xl">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-4">

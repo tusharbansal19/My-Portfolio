@@ -20,7 +20,7 @@ const  HeroSection = ({ setActiveSection, darkMode }) => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-center gap-12 px-6 pt-14 pb-5 relative overflow-hidden">
+    <section className="flex flex-col md:flex-row items-center justify-center gap-4 px-6 pt-16 md:pt-10 pb-2 relative overflow-hidden">
       {/* Cosmic Glow */}
       <div className="absolute -z-10 left-1/2 top-1/3 w-[600px]  bg-cyan-400 opacity-20 rounded-full blur-3xl animate-pulse" />
       {/* Hero Card */}

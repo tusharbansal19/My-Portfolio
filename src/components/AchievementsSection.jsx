@@ -10,7 +10,7 @@ const achievements = [
 
 const AchievementsSection = ({ setActiveSection, darkMode }) => {
   return (
-    <section className="min-h-[60vh] flex flex-col items-center justify-center gap-8 px-6 py-12 relative overflow-hidden">
+    <section className="flex flex-col items-center justify-center gap-8 px-6 py-12 relative overflow-hidden">
       <h2 className="text-3xl md:text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text animate-gradient-move">My <span className="text-purple-300">Achievements</span></h2>
       {/* Centered Top 3 Achievements */}
       <div className="w-full flex flex-col md:flex-row justify-center items-center gap-4 mb-8">

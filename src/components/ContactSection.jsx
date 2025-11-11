@@ -60,7 +60,7 @@ const ContactSection = ({ setActiveSection, darkMode }) => {
   };
 
   return (
-    <section className="min-h-[60vh] flex flex-col items-center justify-center gap-8 px-6 py-12 relative overflow-hidden">
+    <section className="flex flex-col items-center justify-center gap-8 px-6 py-12 relative overflow-hidden">
       {/* Location Section */}
       <div className="w-full max-w-lg mb-8 p-6 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg flex flex-col items-center gap-4" style={{background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)'}}>
         <div className="flex items-center gap-3 mb-2">
