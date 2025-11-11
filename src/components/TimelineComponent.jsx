@@ -1,5 +1,3 @@
-import React from "react";
-import { Timeline, TimelineItem, TimelineBody } from "flowbite-react";
 import { FaSchool, FaGraduationCap, FaUniversity, FaCode, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 
 const TimelineComponent = () => {
