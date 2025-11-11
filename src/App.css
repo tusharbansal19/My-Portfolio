@@ -337,14 +337,32 @@ main>.element+.element {
 /* Mobile responsive gaps */
 @media (max-width: 640px) {
   main>.element+.element {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Reduce section padding on mobile */
+  section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Ensure projects section is visible */
+  #projects {
+    min-height: auto !important;
+    display: block !important;
+    visibility: visible !important;
   }
 }
 
 /* Tablet responsive gaps */
 @media (min-width: 641px) and (max-width: 1024px) {
   main>.element+.element {
-    margin-top: 2rem;
+    margin-top: 1rem;
+  }
+  
+  section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
   }
 }
 
@@ -578,5 +596,71 @@ classes for responsive spacing */
     flex: 1;
     display: flex;
     flex-direction: column;
+  }
+}/* Mob
+ile-specific fixes */
+@media (max-width: 768px) {
+  /* Ensure all sections are visible on mobile */
+  .element {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Reduce header sizes on mobile */
+  h1, h2, h3 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Compact spacing for mobile */
+  .text-center.mb-16,
+  .text-center.mb-12,
+  .text-center.mb-8,
+  .text-center.mb-6 {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Projects section mobile fixes */
+  #projects {
+    padding: 1rem 0.5rem !important;
+  }
+  
+  #projects .grid {
+    gap: 1rem !important;
+  }
+  
+  /* About and Skills section mobile spacing */
+  #about, #skills {
+    padding: 0.75rem 1rem !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  main>.element+.element {
+    margin-top: 0.25rem;
+  }
+  
+  section {
+    padding: 0.5rem 0.75rem !important;
+  }
+  
+  .px-4, .px-6 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+/* Fix for very large gaps */
+@media (max-width: 640px) {
+  /* Specific gap reduction between About and Skills */
+  #about + * {
+    margin-top: 0.25rem !important;
+  }
+  
+  #skills + * {
+    margin-top: 0.25rem !important;
   }
 }

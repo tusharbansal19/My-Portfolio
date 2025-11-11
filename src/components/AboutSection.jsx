@@ -49,7 +49,7 @@ const AboutSection = ({ setActiveSection, darkMode }) => {
   return (
     <section 
       ref={sectionRef}
-      className="h-full flex items-center justify-center px-4 py-8 relative overflow-hidden"
+      className="h-full flex items-center justify-center px-4 py-4 md:py-6 lg:py-8 relative overflow-hidden"
     >
       {/* Subtle background gradient */}
       <div 

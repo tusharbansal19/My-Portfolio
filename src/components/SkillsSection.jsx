@@ -75,7 +75,7 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="flex flex-col items-center justify-center gap-6 px-4 py-8 relative overflow-hidden">
+    <section ref={sectionRef} className="flex flex-col items-center justify-center gap-4 md:gap-6 px-4 py-4 md:py-6 lg:py-8 relative overflow-hidden">
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left: Skills List in Two Columns */}
         <div className="rounded-2xl shadow-xl glass-effect border border-blue-900 bg-[#18122b] p-6 flex flex-col gap-6 min-h-[260px] animate-glow">

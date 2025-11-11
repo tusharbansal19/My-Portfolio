@@ -83,7 +83,7 @@ function App() {
     <div className={`font-sans flex flex-col relative scroll-smooth`}>
       <StarBackground />
       <NewHeader activeSection={activeSection} setActiveSection={setActiveSection} darkMode={darkMode} setDarkMode={setDarkMode} />
-      <main className="flex-1 overflow-y-auto space-y-4 md:space-y-6 lg:space-y-8">
+      <main className="flex-1 overflow-y-auto space-y-1 sm:space-y-2 md:space-y-4 lg:space-y-6">
         <Element name="hero" className="element">
           <motion.section 
             id="hero"

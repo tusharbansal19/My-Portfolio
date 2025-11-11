@@ -460,9 +460,9 @@ const ProjectsSection = ({ setActiveSection }) => {
   const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
 
   return (
-    <section className="flex flex-col items-center justify-center gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 py-8 lg:py-10 relative">
+    <section className="flex flex-col items-center justify-center gap-4 md:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8 relative min-h-0">
       {/* Header */}
-      <div className="text-center mb-6 lg:mb-8 z-10 max-w-4xl">
+      <div className="text-center mb-4 md:mb-6 lg:mb-8 z-10 max-w-4xl">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-4">
           <Code className="w-4 h-4" />
           Portfolio Showcase

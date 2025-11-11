@@ -6,8 +6,8 @@ const ContactSection = ({ darkMode }) => {
   const [touched, setTouched] = useState({ name: false, email: false, message: false });
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState({ show: false, success: false, message: '' });
-  
-  
+
+
 
   // Validation logic
   const errors = {
@@ -15,8 +15,8 @@ const ContactSection = ({ darkMode }) => {
     email: !form.email
       ? 'Email is required.'
       : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
-      ? 'Enter a valid email address.'
-      : '',
+        ? 'Enter a valid email address.'
+        : '',
     message: !form.message ? 'Message is required.' : '',
   };
 
@@ -83,12 +83,12 @@ const ContactSection = ({ darkMode }) => {
       {/* Main Content: Map and Form - Side by Side on Desktop, Stacked on Mobile */}
       <div className="w-full max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12">
-          
+
           {/* Left Side: Location & Map (First on Mobile) */}
           <div className="order-1 lg:order-1">
-            <div className="p-6 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg h-full" 
-                 style={{background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)'}}>
-              
+            <div className="p-6 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg h-full"
+              style={{ background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)' }}>
+
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl text-purple-400">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
@@ -98,22 +98,22 @@ const ContactSection = ({ darkMode }) => {
                 </span>
                 <h3 className="text-xl font-bold text-purple-200">Location</h3>
               </div>
-              
+
               <div className="text-center text-purple-100 text-base font-medium mb-6">
                 Ajay Kumar Garg Engineering College<br />
                 Ghaziabad, Delhi NCR, India
               </div>
-              
+
               {/* Embedded Google Map */}
-              <div className="w-full rounded-xl overflow-hidden border border-purple-900 shadow-lg" 
-                   style={{height:'350px', minHeight:'300px', background:'#18122b'}}>
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4348.121152017592!2d77.5025031!3d28.6784491!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf243a45cd65b%3A0x90f68b9636329241!2sAjay%20Kumar%20Garg%20Engineering%20College%20Amphitheatre!5e1!3m2!1sen!2sin!4v1753603083464!5m2!1sen!2sin" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen="" 
-                  loading="lazy" 
+              <div className="w-full rounded-xl overflow-hidden border border-purple-900 shadow-lg"
+                style={{ height: '350px', minHeight: '300px', background: '#18122b' }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4348.121152017592!2d77.5025031!3d28.6784491!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf243a45cd65b%3A0x90f68b9636329241!2sAjay%20Kumar%20Garg%20Engineering%20College%20Amphitheatre!5e1!3m2!1sen!2sin!4v1753603083464!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="AKGEC Location"
                 />
@@ -123,63 +123,63 @@ const ContactSection = ({ darkMode }) => {
 
           {/* Right Side: Contact Form (Second on Mobile) */}
           <div className="order-2 lg:order-2">
-            <form onSubmit={handleSubmit} className="p-6 lg:p-8 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg relative h-full flex flex-col justify-center" 
-                  style={{background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)'}}>
-              
+            <form onSubmit={handleSubmit} className="p-6 lg:p-8 rounded-2xl shadow-xl glass-effect border border-purple-900 bg-white/10 backdrop-blur-lg relative h-full flex flex-col justify-center"
+              style={{ background: darkMode ? 'rgba(44,20,80,0.5)' : 'rgba(255,255,255,0.7)', boxShadow: '0 8px 32px 0 rgba(162, 89, 255, 0.25)' }}>
+
               {/* Loading Spinner Overlay */}
               {loading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-20 rounded-2xl">
-                  <div className="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin shadow-xl bg-gradient-to-tr from-purple-400 via-pink-400 to-blue-400" 
-                       style={{boxShadow:'0 0 32px 8px #a259ff55'}}></div>
+                  <div className="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin shadow-xl bg-gradient-to-tr from-purple-400 via-pink-400 to-blue-400"
+                    style={{ boxShadow: '0 0 32px 8px #a259ff55' }}></div>
                 </div>
               )}
 
               <div className="space-y-4">
                 <div className="flex flex-col gap-1">
-                  <input 
-                    type="text" 
-                    name="name" 
-                    placeholder="Full Name" 
-                    value={form.name} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur} 
-                    required 
-                    className="px-4 py-3 rounded-lg bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300" 
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={form.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    className="px-4 py-3 rounded-lg bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300"
                   />
                   {touched.name && errors.name && <span className="text-red-400 text-xs mt-1">{errors.name}</span>}
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <input 
-                    type="email" 
-                    name="email" 
-                    placeholder="Email Address" 
-                    value={form.email} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur} 
-                    required 
-                    className="px-4 py-3 rounded-lg bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300" 
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={form.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    className="px-4 py-3 rounded-lg bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300"
                   />
                   {touched.email && errors.email && <span className="text-red-400 text-xs mt-1">{errors.email}</span>}
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <textarea 
-                    name="message" 
-                    placeholder="Your Message" 
-                    value={form.message} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur} 
-                    required 
-                    rows={6} 
-                    className="px-4 py-3 rounded-lg bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 resize-none" 
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    value={form.message}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
+                    rows={6}
+                    className="px-4 py-3 rounded-lg bg-purple-900/20 text-purple-100 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 resize-none"
                   />
                   {touched.message && errors.message && <span className="text-red-400 text-xs mt-1">{errors.message}</span>}
                 </div>
 
-                <button 
-                  type="submit" 
-                  disabled={loading} 
+                <button
+                  type="submit"
+                  disabled={loading}
                   className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-400 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Sending...' : <><FaPaperPlane /> Send Message</>}
