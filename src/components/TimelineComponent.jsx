@@ -57,7 +57,7 @@ const TimelineComponent = () => {
   ];
 
   return (
-    <section className="py-8 px-4 relative overflow-hidden bg-transparent">
+    <section className="py-4 md:py-8 px-4 relative overflow-visible md:overflow-hidden bg-transparent">
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-cyan-200 text-transparent bg-clip-text">

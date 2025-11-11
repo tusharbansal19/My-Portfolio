@@ -98,16 +98,14 @@ function App() {
         <Element name="about" className="element">
           <motion.section 
             id="about"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
             onViewportEnter={() => {
-              console.log('About section entered viewport');
               setActiveSection('about');
             }}
           >
-
             <AboutSection setActiveSection={setActiveSection} darkMode={darkMode} />
           </motion.section>
         </Element>
@@ -116,10 +114,10 @@ function App() {
         <Element name="timeline" className="element">
           <motion.section 
             id="timeline"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <TimelineComponent />
           </motion.section>
@@ -128,10 +126,10 @@ function App() {
         <Element name="skills" className="element">
           <motion.section 
             id="skills"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <SkillsSection setActiveSection={setActiveSection} darkMode={darkMode} />
           </motion.section>
@@ -140,10 +138,10 @@ function App() {
         <Element name="projects" className="element">
           <motion.section 
             id="projects"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <ProjectsSection setActiveSection={setActiveSection} darkMode={darkMode} />
           </motion.section>
@@ -152,10 +150,10 @@ function App() {
         <Element name="achievements" className="element">
           <motion.section 
             id="achievements"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <AchievementsSection setActiveSection={setActiveSection} darkMode={darkMode} />
           </motion.section>
@@ -164,10 +162,10 @@ function App() {
         <Element name="contact" className="element">
           <motion.section 
             id="contact"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <ContactSection setActiveSection={setActiveSection} darkMode={darkMode} />
           </motion.section>

@@ -26,7 +26,7 @@
 
 /* In your CSS file (e.g., App.css) */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Timeline custom styles moved from TimelineComponent.jsx */
@@ -339,13 +339,13 @@ main>.element+.element {
   main>.element+.element {
     margin-top: 0.5rem;
   }
-  
+
   /* Reduce section padding on mobile */
   section {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
   }
-  
+
   /* Ensure projects section is visible */
   #projects {
     min-height: auto !important;
@@ -359,7 +359,7 @@ main>.element+.element {
   main>.element+.element {
     margin-top: 1rem;
   }
-  
+
   section {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
@@ -506,23 +506,25 @@ classes for responsive spacing */
 
 /* Contact Section Responsive Styles */
 @media (max-width: 1023px) {
+
   /* Mobile and Tablet: Stack vertically */
   .contact-grid {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .contact-map-container {
     order: 1;
   }
-  
+
   .contact-form-container {
     order: 2;
   }
 }
 
 @media (min-width: 1024px) {
+
   /* Desktop: Side by side */
   .contact-grid {
     display: grid;
@@ -530,7 +532,7 @@ classes for responsive spacing */
     gap: 2rem;
     align-items: start;
   }
-  
+
   .contact-map-container,
   .contact-form-container {
     height: 100%;
@@ -565,7 +567,7 @@ classes for responsive spacing */
   .contact-form {
     padding: 1rem !important;
   }
-  
+
   .contact-form input,
   .contact-form textarea {
     padding: 0.75rem !important;
@@ -587,33 +589,38 @@ classes for responsive spacing */
 
 /* Ensure equal heights on desktop */
 @media (min-width: 1024px) {
-  .contact-section-grid > div {
+  .contact-section-grid>div {
     display: flex;
     flex-direction: column;
   }
-  
-  .contact-section-grid > div > div {
+
+  .contact-section-grid>div>div {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
-}/* Mob
+}
+
+/* Mob
 ile-specific fixes */
 @media (max-width: 768px) {
+
   /* Ensure all sections are visible on mobile */
   .element {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
-  
+
   /* Reduce header sizes on mobile */
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-size: 1.5rem !important;
     line-height: 1.3 !important;
     margin-bottom: 0.5rem !important;
   }
-  
+
   /* Compact spacing for mobile */
   .text-center.mb-16,
   .text-center.mb-12,
@@ -621,18 +628,19 @@ ile-specific fixes */
   .text-center.mb-6 {
     margin-bottom: 0.75rem !important;
   }
-  
+
   /* Projects section mobile fixes */
   #projects {
     padding: 1rem 0.5rem !important;
   }
-  
+
   #projects .grid {
     gap: 1rem !important;
   }
-  
+
   /* About and Skills section mobile spacing */
-  #about, #skills {
+  #about,
+  #skills {
     padding: 0.75rem 1rem !important;
   }
 }
@@ -642,12 +650,13 @@ ile-specific fixes */
   main>.element+.element {
     margin-top: 0.25rem;
   }
-  
+
   section {
     padding: 0.5rem 0.75rem !important;
   }
-  
-  .px-4, .px-6 {
+
+  .px-4,
+  .px-6 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
   }
@@ -655,12 +664,125 @@ ile-specific fixes */
 
 /* Fix for very large gaps */
 @media (max-width: 640px) {
+
   /* Specific gap reduction between About and Skills */
-  #about + * {
+  #about+* {
     margin-top: 0.25rem !important;
   }
-  
-  #skills + * {
+
+  #skills+* {
     margin-top: 0.25rem !important;
+  }
+}
+
+/* Force visibility for Timeline and Projects sections on mobile */
+@media (max-width: 768px) {
+
+  #timeline,
+  #projects {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure motion sections are visible */
+  #timeline>*,
+  #projects>* {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Remove any hidden or transform issues */
+  .element {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Framer motion overrides for mobile */
+  [data-projection-id] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Immediate scroll behavior */
+html {
+  scroll-behavior: auto !important;
+}
+
+/* Remove animation delays on mobile */
+@media (max-width: 768px) {
+  * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+  }
+
+  .motion-section {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Ensure sections are always visible during scroll */
+.element {
+  will-change: auto !important;
+}
+
+/* Mobile viewport fixes */
+@media (max-width: 768px) {
+
+  /* Timeline specific fixes */
+  #timeline {
+    padding: 0.5rem !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  /* Projects specific fixes */
+  #projects {
+    padding: 0.5rem !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  /* Remove any transform3d issues */
+  .element,
+  .element * {
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: visible !important;
+  }
+}
+
+/* 
+Disable all animations on mobile for immediate visibility */
+@media (max-width: 768px) {
+
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0.01s !important;
+    transition-delay: 0s !important;
+    transition-duration: 0.01s !important;
+  }
+}
+
+/* Ensure framer-motion doesn't hide content */
+[data-framer-component-type] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Override any motion transforms */
+@media (max-width: 768px) {
+  [style*="transform"] {
+    transform: none !important;
+  }
+
+  [style*="opacity"] {
+    opacity: 1 !important;
   }
 }
