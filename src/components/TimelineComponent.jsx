@@ -57,9 +57,9 @@ const TimelineComponent = () => {
   ];
 
   return (
-    <section className="py-16 px-4 relative overflow-hidden bg-transparent">
+    <section className="py-8 px-4 relative overflow-hidden bg-transparent">
       {/* Header */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-8">
         <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-cyan-200 text-transparent bg-clip-text">
           My Journey
         </h2>
@@ -132,7 +132,7 @@ const TimelineComponent = () => {
       </div>
 
       {/* Stats Summary */}
-      <div className="mt-16">
+      <div className="mt-8">
         <div className="max-w-4xl mx-auto">
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-500 shadow-2xl">
             <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-purple-300 to-cyan-300 text-transparent bg-clip-text">

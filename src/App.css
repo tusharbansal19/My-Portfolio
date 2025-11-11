@@ -3,14 +3,17 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .loader {
   border-top-color: transparent;
 }
+
 .animate-fade-in {
   animation: fade-in 0.8s ease-in-out;
 }
@@ -20,6 +23,7 @@
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 /* In your CSS file (e.g., App.css) */
 html {
   scroll-behavior: smooth;
@@ -48,7 +52,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
   opacity: 0.7;
   pointer-events: none;
 }
@@ -83,7 +87,6 @@ html {
 
 /* Element styling for react-scroll */
 .element {
-  min-height: 100vh;
   scroll-margin-top: 80px;
 }
 
@@ -91,9 +94,12 @@ html {
 
 /* Floating nav animations */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -128,9 +134,12 @@ html {
 
 /* Pulse animation for active nav items */
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
   }
+
   50% {
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
   }
@@ -146,7 +155,7 @@ html {
     bottom: 1rem !important;
     left: 1rem !important;
   }
-  
+
   .floating-nav .absolute {
     bottom: 3.5rem !important;
   }
@@ -168,10 +177,13 @@ html {
 
 /* Voice recording animation */
 @keyframes recording-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 0.7;
@@ -197,9 +209,11 @@ html {
     transform: translateY(20px) scale(0.8);
     opacity: 0;
   }
+
   50% {
     transform: translateY(-5px) scale(1.05);
   }
+
   100% {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -211,9 +225,12 @@ html {
 }
 
 @keyframes button-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.7);
   }
+
   50% {
     box-shadow: 0 0 0 10px rgba(147, 51, 234, 0);
   }
@@ -255,9 +272,12 @@ html {
 }
 
 @keyframes robot-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: brightness(1) drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
   }
+
   50% {
     filter: brightness(1.1) drop-shadow(0 0 15px rgba(59, 130, 246, 0.8));
   }
@@ -272,9 +292,12 @@ html {
 
 /* Pulse ring animation for robot button */
 @keyframes pulse-ring {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
   }
+
   50% {
     box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
   }
@@ -286,9 +309,12 @@ html {
 
 /* Typing glow animation */
 @keyframes typing-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.4);
   }
+
   50% {
     box-shadow: 0 0 0 10px rgba(147, 51, 234, 0);
   }
@@ -296,4 +322,261 @@ html {
 
 .animate-typing-glow {
   animation: typing-glow 1.5s ease-in-out infinite;
+}
+
+/* Responsive section spacing */
+.element {
+  scroll-margin-top: 80px;
+}
+
+/* Add responsive gaps between sections */
+main>.element+.element {
+  margin-top: 3rem;
+}
+
+/* Mobile responsive gaps */
+@media (max-width: 640px) {
+  main>.element+.element {
+    margin-top: 1.5rem;
+  }
+}
+
+/* Tablet responsive gaps */
+@media (min-width: 641px) and (max-width: 1024px) {
+  main>.element+.element {
+    margin-top: 2rem;
+  }
+}
+
+/* Desktop responsive gaps */
+@media (min-width: 1025px) {
+  main>.element+.element {
+    margin-top: 4rem;
+  }
+}
+
+/* Specific section spacing adjustments */
+@media (max-width: 768px) {
+  section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .text-center.mb-16,
+  .text-center.mb-12,
+  .text-center.mb-8 {
+    margin-bottom: 1rem !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  section {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* Utility 
+classes for responsive spacing */
+.section-gap-sm {
+  margin-top: 1rem;
+}
+
+.section-gap-md {
+  margin-top: 2rem;
+}
+
+.section-gap-lg {
+  margin-top: 3rem;
+}
+
+.section-gap-xl {
+  margin-top: 4rem;
+}
+
+/* Responsive utility classes */
+@media (max-width: 640px) {
+  .sm\:section-gap-xs {
+    margin-top: 0.5rem;
+  }
+
+  .sm\:section-gap-sm {
+    margin-top: 1rem;
+  }
+
+  .sm\:section-gap-md {
+    margin-top: 1.5rem;
+  }
+
+  .sm\:section-gap-lg {
+    margin-top: 2rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .md\:section-gap-sm {
+    margin-top: 1.5rem;
+  }
+
+  .md\:section-gap-md {
+    margin-top: 2rem;
+  }
+
+  .md\:section-gap-lg {
+    margin-top: 2.5rem;
+  }
+
+  .md\:section-gap-xl {
+    margin-top: 3rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .lg\:section-gap-md {
+    margin-top: 2.5rem;
+  }
+
+  .lg\:section-gap-lg {
+    margin-top: 3rem;
+  }
+
+  .lg\:section-gap-xl {
+    margin-top: 4rem;
+  }
+
+  .lg\:section-gap-2xl {
+    margin-top: 5rem;
+  }
+}
+
+/* Smooth transitions for responsive changes */
+.element {
+  transition: margin-top 0.3s ease-in-out;
+}
+
+/* Ensure proper spacing on different screen sizes */
+@media (max-width: 480px) {
+  main>.element+.element {
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  main>.element+.element {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  main>.element+.element {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (min-width: 1201px) {
+  main>.element+.element {
+    margin-top: 3.5rem;
+  }
+}
+
+/* Contact Section Responsive Styles */
+@media (max-width: 1023px) {
+  /* Mobile and Tablet: Stack vertically */
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .contact-map-container {
+    order: 1;
+  }
+  
+  .contact-form-container {
+    order: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: Side by side */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  .contact-map-container,
+  .contact-form-container {
+    height: 100%;
+    min-height: 500px;
+  }
+}
+
+/* Map responsive sizing */
+@media (max-width: 640px) {
+  .contact-map {
+    height: 250px !important;
+    min-height: 200px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .contact-map {
+    height: 300px !important;
+    min-height: 250px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-map {
+    height: 350px !important;
+    min-height: 300px !important;
+  }
+}
+
+/* Form responsive styling */
+@media (max-width: 640px) {
+  .contact-form {
+    padding: 1rem !important;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.75rem !important;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 641px) {
+  .contact-form {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-form {
+    padding: 2rem !important;
+  }
+}
+
+/* Ensure equal heights on desktop */
+@media (min-width: 1024px) {
+  .contact-section-grid > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-section-grid > div > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 }

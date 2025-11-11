@@ -80,9 +80,7 @@ const NewHeader = ({ activeSection, setActiveSection, darkMode, setDarkMode }) =
           <div className="flex items-center gap-4 min-w-[150px] justify-end">
             <a href="https://github.com/tusharbansal19" target="_blank" rel="noopener noreferrer" className="text-[#b18cff] hover:text-white text-xl"><FaGithub /></a>
             <a href="https://www.linkedin.com/in/tushar-bansal-79aa6828b/" target="_blank" rel="noopener noreferrer" className="text-[#b18cff] hover:text-white text-xl"><FaLinkedin /></a>
-            <button onClick={() => setDarkMode(!darkMode)} className="text-[#b18cff] hover:text-white text-xl ml-2">
-              {darkMode ? <FaSun /> : <FaMoon />}
-            </button>
+           
             {/* Hamburger for mobile */}
             <button className="md:hidden text-[#b18cff] text-2xl ml-2" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? <FaTimes /> : <FaBars />}
