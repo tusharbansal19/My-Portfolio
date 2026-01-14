@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronRight, ExternalLink, Github, Calendar, User, Code, Award, Eye, Heart, Star } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, Code, Star, Award, ChevronRight, User, Calendar, ArrowRight } from 'lucide-react';
 
+// Image constants
 const imageTypingApp = '/image/typing.png';
 const imageWeather = '/image/dashboard.png';
 const imageGrabeats = '/image/grabeats.png';
@@ -27,12 +29,6 @@ const projects = [
       { name: 'Redux', category: 'State', color: 'purple' },
       { name: 'Socket.IO', category: 'Real-time', color: 'yellow' }
     ],
-    metrics: {
-      users: '5K+',
-      performance: '95%',
-      uptime: '99.5%'
-    },
-    
     features: [
       'Real-time Typing Competition',
       'Interactive Keyboard with Animated Keys',
@@ -41,11 +37,6 @@ const projects = [
       'Socket-based Typing Sync',
       'Responsive & Mobile Friendly UI'
     ],
-    challenges: [
-      'Smooth real-time sync across sockets',
-      'Maintaining UI responsiveness during typing',
-      'Efficient state management with Redux'
-    ],
     achievements: [
       'Built advanced keyboard animation system',
       'Achieved <100ms socket lag in multiplayer mode',
@@ -53,17 +44,9 @@ const projects = [
     ],
     links: {
       live: 'https://typing-webapp-frountend.onrender.com/',
-      github: 'https://github.com/tusharbansal00/dynamic-typing-webapp', // example
-      case_study: ''
-    },
-    meta: [
-      { label: 'Role', value: 'Full Stack Developer', icon: User },
-      { label: 'Duration', value: '1.5 months', icon: Calendar },
-      { label: 'Team', value: '1 developers', icon: User },
-      { label: 'Status', value: 'In Progress', icon: Award }
-    ]
+      github: 'https://github.com/tusharbansal00/dynamic-typing-webapp'
+    }
   },
-  
   {
     id: 'task-manager',
     title: 'Task Manager Web App',
@@ -72,20 +55,14 @@ const projects = [
     detailedDescription: 'Designed for productivity, this app allows users to create, update, and track tasks in real time. Features include collaborative task boards, notifications, and a responsive UI.',
     image: imageWeather,
     category: 'Productivity',
-    status: '',
+    status: 'Completed',
     timeline: '2 months',
-    teamSize: '4 developers',
     technologies: [
       { name: 'React', category: 'Frontend', color: 'blue' },
       { name: 'Node.js', category: 'Backend', color: 'green' },
       { name: 'Express.js', category: 'Backend', color: 'green' },
       { name: 'Tailwind CSS', category: 'Styling', color: 'cyan' }
     ],
-    metrics: {
-      users: '2K+',
-      performance: '90%',
-      uptime: '99%'
-    },
     features: [
       'Real-time Task Synchronization',
       'Collaborative Task Boards',
@@ -94,26 +71,14 @@ const projects = [
       'Responsive UI/UX',
       'Notifications System'
     ],
-    challenges: [
-      'Real-time data sync',
-      'User management',
-      'Cross-device compatibility'
-    ],
     achievements: [
       'Enabled team collaboration',
       'Improved productivity by 30%'
     ],
     links: {
       live: 'https://t-task-management.onrender.com/',
-      github: 'https://github.com/tusharbansal19/TaskManagement',
-      case_study: ''
-    },
-    meta: [
-      { label: 'Role', value: 'Frontend Lead', icon: User },
-      { label: 'Duration', value: '2 months', icon: Calendar },
-      { label: 'Team', value: '4 developers', icon: User },
-      { label: 'Status', value: 'Completed', icon: Award }
-    ]
+      github: 'https://github.com/tusharbansal19/TaskManagement'
+    }
   },
   {
     id: 'grabeats',
@@ -123,37 +88,22 @@ const projects = [
     detailedDescription: 'Built for seamless food ordering, GrabEats supports real-time order tracking, secure payments, and a scalable backend. Utilizes modern web technologies for a fast, reliable experience.',
     image: imageGrabeats,
     category: 'E-commerce',
-    status: '',
+    status: 'Completed',
     timeline: '1 month',
-    teamSize: '3 developers',
     technologies: [
       { name: 'React', category: 'Frontend', color: 'blue' },
       { name: 'Next.js', category: 'Frontend', color: 'purple' },
       { name: 'Node.js', category: 'Backend', color: 'green' },
       { name: 'MongoDB', category: 'Database', color: 'green' },
-      { name: 'D3.js', category: 'Visualization', color: 'orange' },
-      { name: 'WebRTC', category: 'Real-time', color: 'red' },
       { name: 'Tailwind CSS', category: 'Styling', color: 'cyan' }
     ],
-    metrics: {
-      users: '5K+',
-      performance: '93%',
-      uptime: '99.5%'
-    },
     features: [
       'OTP Authentication',
       'Real-time Order Tracking',
       'Multi-image Product Support',
       'RESTful APIs',
       'Responsive UI/UX',
-      'Cross-device Compatibility',
-      'Secure Payments',
-      'Scalable Backend'
-    ],
-    challenges: [
-      'Real-time order updates',
-      'Payment integration',
-      'Image optimization'
+      'Secure Payments'
     ],
     achievements: [
       'Launched in 1 month',
@@ -161,38 +111,25 @@ const projects = [
     ],
     links: {
       live: 'https://grabeats.onrender.com/',
-      github: 'https://github.com/tusharbansal19/GrabEats',
-      case_study: ''
-    },
-    meta: [
-      { label: 'Role', value: 'Backend Lead', icon: User },
-      { label: 'Duration', value: '1 month', icon: Calendar },
-      { label: 'Team', value: '3 developers', icon: User },
-      { label: 'Status', value: 'Completed', icon: Award }
-    ]
+      github: 'https://github.com/tusharbansal19/GrabEats'
+    }
   },
   {
     id: 'tushar-automobiles',
-    title: 'Tushar Automobiles – Auto Parts E-commerce Website',
+    title: 'Tushar Automobiles',
     subtitle: 'Auto Parts E-commerce',
     description: 'A commercial automobile parts web platform using Next.js and Prisma, featuring dynamic product filtering, server-side rendering, and a mobile-first responsive layout.',
     detailedDescription: 'Developed a robust auto parts e-commerce site with advanced filtering, SSR, and seamless mobile experience. Built with Next.js, Prisma, and modern UI libraries.',
     image: imageAutomobiles,
     category: 'E-commerce',
-    status: '',
+    status: 'Completed',
     timeline: '1 month',
-    teamSize: '2 developers',
     technologies: [
       { name: 'Next.js', category: 'Frontend', color: 'purple' },
       { name: 'Prisma', category: 'ORM', color: 'blue' },
       { name: 'React', category: 'Frontend', color: 'blue' },
       { name: 'Tailwind CSS', category: 'Styling', color: 'cyan' }
     ],
-    metrics: {
-      users: '1K+',
-      performance: '90%',
-      uptime: '99%'
-    },
     features: [
       'Dynamic Product Filtering',
       'Server-side Rendering (SSR)',
@@ -201,52 +138,50 @@ const projects = [
       'Secure Checkout',
       'Admin Dashboard'
     ],
-    challenges: [
-      'SSR optimization',
-      'Product data management',
-      'Mobile UX'
-    ],
     achievements: [
       'Launched in 1 month',
       'Positive client feedback'
     ],
     links: {
       live: 'https://automobiles-next.onrender.com',
-      github: 'https://github.com/tusharbansal19/automobiles-next',
-      case_study: ''
-    },
-    meta: [
-      { label: 'Role', value: 'Full Stack', icon: User },
-      { label: 'Duration', value: '1 month', icon: Calendar },
-      { label: 'Team', value: '2 developers', icon: User },
-      { label: 'Status', value: 'Completed', icon: Award }
-    ]
+      github: 'https://github.com/tusharbansal19/automobiles-next'
+    }
   }
 ];
 
-function ProjectCard({ project, reverse, index }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef(null);
+const ProjectsSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const duration = 5000; // 5 seconds
+  const intervalRef = React.useRef(null);
 
+  // Auto-switch logic
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
+    if (isPaused) return;
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
+    const startTime = Date.now();
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = (elapsed / duration) * 100;
+      
+      if (newProgress >= 100) {
+        setActiveIndex((prev) => (prev + 1) % projects.length);
+        setProgress(0);
+      } else {
+        setProgress(newProgress);
+        intervalRef.current = requestAnimationFrame(animate);
+      }
+    };
 
-    return () => observer.disconnect();
-  }, []);
+    intervalRef.current = requestAnimationFrame(animate);
 
+    return () => {
+      if (intervalRef.current) cancelAnimationFrame(intervalRef.current);
+    };
+  }, [activeIndex, isPaused]);
+
+  // Color helper
   const getTechColor = (color) => {
     const colors = {
       blue: 'from-blue-500/20 to-blue-600/30 border-blue-400/30 text-blue-200',
@@ -260,290 +195,216 @@ function ProjectCard({ project, reverse, index }) {
     return colors[color] || colors.blue;
   };
 
-  const getStatusColor = (status) => {
-    const colors = {
-      Live: 'bg-green-500/20 text-green-400 border-green-500/30',
-      Beta: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      Development: 'bg-blue-500/20 text-blue-400 border-blue-500/30'
-    };
-    return colors[status] || colors.Development;
-  };
-
   return (
-    <div 
-      ref={cardRef}
-      className={`w-full flex justify-center mb-8 lg:mb-10 transform transition-all duration-1000 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-      }`}
-      style={{ transitionDelay: `${index * 200}ms` }}
-    >
-      <div
-        className={`w-full max-w-5xl flex flex-col md:flex-row ${
-          reverse ? 'xl:flex-row-reverse' : ''
-        } gap-0 rounded-2xl backdrop-blur-xl border border-purple-500/20 overflow-hidden shadow-2xl group hover:shadow-purple-500/10 transition-all duration-700 hover:scale-[1.01] relative`}
-        style={{
-          background: 'linear-gradient(135deg, rgba(15,15,35,0.95) 0%, rgba(25,15,45,0.95) 50%, rgba(35,20,55,0.95) 100%)',
-          boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05)'
-        }}
-      >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-1/2 -right-1/2 w-64 h-64 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-1/2 -left-1/2 w-64 h-64 bg-gradient-to-tr from-blue-500/5 to-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        </div>
-
-        {/* Image Section */}
-        <div className="md:w-1/2 w-full h-48 xl:h-auto min-h-[250px] xl:min-h-[280px] relative overflow-hidden group/image">
-          {/* Image Container */}
-          <div className="relative w-full h-full">
-            <img
-              src={project.image}
-              alt={project.title}
-              className={`object-cover w-full h-full transition-all duration-1000 group-hover:scale-110 ${
-                imageLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
-              onLoad={() => setImageLoaded(true)}
-            />
-            
-            {/* Image Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          </div>
-
-          {/* Floating Status Badge */}
-          <div className="absolute top-4 left-4 z-10">
-            <div className={`px-3 py-1.5 rounded-full backdrop-blur-md border text-xs font-semibold ${getStatusColor(project.status)}`}>
-              <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-current animate-pulse"></div>
-                {project.status}
-              </div>
-            </div>
-          </div>
-
-          {/* Category Badge */}
-          <div className="absolute top-4 right-4 z-10">
-            <div className="px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-medium">
-              {project.category}
-            </div>
-          </div>
-
-
-          {/* Decorative Elements */}
-          <div className="absolute top-1/4 right-6 w-3 h-3 border-2 border-cyan-400/50 rounded-full animate-ping"></div>
-          <div className="absolute bottom-1/3 left-6 w-4 h-4 border border-purple-400/30 rounded-full animate-pulse"></div>
-        </div>
-
-        {/* Content Section */}
-        <div className="md:w-1/2 w-full flex flex-col justify-between p-4 lg:p-5 relative z-10">
-          {/* Header */}
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="text-xs font-medium text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/20">
-                #{(index + 1).toString().padStart(2, '0')}
-              </div>
-              <div className="text-xs text-gray-400">{project.timeline}</div>
-            </div>
-            <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-white mb-1.5 leading-tight group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:via-purple-400 group-hover:to-blue-400 group-hover:bg-clip-text transition-all duration-500">
-              {project.title}
-            </h3>
-            <p className="text-sm lg:text-base text-purple-300 font-medium mb-1.5">
-              {project.subtitle}
-            </p>
-            <p className="text-gray-300 text-xs lg:text-sm leading-relaxed mb-3">
-              {isExpanded ? project.detailedDescription : project.description}
-            </p>
-
-            <div className="flex  gap-3">
-            {project.links.live && (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-sm font-medium hover:from-purple-500 hover:to-cyan-500 transition-all duration-300 hover:scale-105 group/btn backdrop-blur-sm"
-              >
-                <ExternalLink className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
-                <span>Live</span>
-              </a>
-            )}
-            <a
-              href={project.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-800/50 border border-gray-600/50 text-white text-sm font-medium hover:bg-gray-700/50 hover:border-gray-500/50 transition-all duration-300 hover:scale-105 group/btn backdrop-blur-sm"
-              >
-              <Github className="w-4 h-4 transition-transform group-hover/btn:scale-110" />
-              <span>Source</span>
-            </a>
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-cyan-400 hover:text-cyan-300 text-xs font-medium flex items-center gap-1 transition-colors duration-300"
-              >
-              {isExpanded ? 'Show Less' : 'Read More'}
-              <ChevronRight className={`w-3 h-3 transition-transform duration-300 ${isExpanded ? 'rotate-90' : ''}`} />
-            </button>
-              </div>
-          </div>
-
-         
-
-          {/* Technologies */}
-          <div className="mb-5">
-            <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-              <Code className="w-4 h-4 text-purple-400" />
-              Tech Stack
-            </h4>
-            <div className="flex flex-wrap gap-1.5">
-              {project.technologies.map((tech, i) => (
-                <div
-                  key={i}
-                  className={`group/tech px-2 py-1.5 rounded-md bg-gradient-to-r border backdrop-blur-sm transition-all duration-300 hover:scale-105 ${getTechColor(tech.color)}`}
-                >
-                  <div className="text-xs font-medium">{tech.name}</div>
-                  <div className="text-xs opacity-70">{tech.category}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Key Features */}
-          {isExpanded && (
-            <div className="mb-5 space-y-4">
-              <div>
-                <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                  <Star className="w-4 h-4 text-yellow-400" />
-                  Key Features
-                </h4>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-1.5">
-                  {project.features.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-gray-300">
-                      <div className="w-1 h-1 rounded-full bg-cyan-400"></div>
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                  <Award className="w-4 h-4 text-green-400" />
-                  Key Achievements
-                </h4>
-                <div className="space-y-1.5">
-                  {project.achievements.map((achievement, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-gray-300">
-                      <div className="w-1 h-1 rounded-full bg-green-400"></div>
-                      {achievement}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-2 mt-auto">
-           
-            
-            
-
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const ProjectsSection = ({ setActiveSection }) => {
-  const [visibleProjects, setVisibleProjects] = useState(2);
-  const [filter, setFilter] = useState('All');
-  
-  const categories = ['All', ...new Set(projects.map(p => p.category))];
-  const filteredProjects = filter === 'All' ? projects : projects.filter(p => p.category === filter);
-
-  return (
-    <section className="flex flex-col items-center justify-center gap-4 md:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 py-4 md:py-6 lg:py-8 relative min-h-0 w-full">
-      {/* Header */}
-      <div className="text-center mb-4 md:mb-6 lg:mb-8 z-10 max-w-4xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-4">
-          <Code className="w-4 h-4" />
-          Portfolio Showcase
-        </div>
-        
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-blue-400 text-transparent bg-clip-text mb-4 leading-tight">
-          Featured Projects
-        </h2>
-        
-        <div className="w-20 lg:w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full mb-4"></div>
-        
-        <p className="text-gray-300 text-base lg:text-lg max-w-3xl mx-auto leading-relaxed">
-          Explore my journey through innovative solutions, cutting-edge technologies, and impactful digital experiences that drive business growth and user engagement.
-        </p>
-
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mt-6">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                filter === category
-                  ? 'bg-gradient-to-r from-purple-500 to-cyan-500 text-white shadow-lg'
-                  : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/10'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Projects Grid */}
-      <div className="w-full max-w-7xl mx-auto z-10">
-        {filteredProjects.slice(0, visibleProjects).map((project, idx) => (
-          <ProjectCard 
-            key={project.id} 
-            project={project} 
-            reverse={idx % 2 === 1} 
-            index={idx}
-          />
-        ))}
-      </div>
-
-      {/* Load More Button */}
-      {visibleProjects < filteredProjects.length && (
-        <button
-          onClick={() => setVisibleProjects(prev => Math.min(prev + 2, filteredProjects.length))}
-          className="px-6 py-3 rounded-lg bg-gradient-to-r from-gray-700 to-gray-600 text-white text-sm font-medium hover:from-gray-600 hover:to-gray-500 transition-all duration-300 hover:scale-105 border border-gray-500/30"
-        >
-          Load More Projects ({filteredProjects.length - visibleProjects} remaining)
-        </button>
-      )}
-
-      {/* Stats Section */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-12 w-full max-w-4xl">
-        {[{label: 'dedicated hours', value: '1000+', icon: Award },
-          { label: 'Projects Completed', value: '25+', icon: Award },
-          { label: 'Technology Expertise', value: '9+', icon: Code },
-          { label: 'Code Commits', value: '200+', icon: Github }
-        ].map((stat, i) => (
-          <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-            <stat.icon className="w-6 h-6 text-purple-400 mx-auto mb-2" />
-            <div className="text-xl lg:text-2xl font-bold text-white mb-1">{stat.value}</div>
-            <div className="text-xs text-gray-400">{stat.label}</div>
-          </div>
-        ))}
-      </div>
+    <section className="py-20 px-4 md:px-8 lg:px-12 w-full relative min-h-screen flex flex-col items-center justify-center">
       
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] opacity-50" />
+         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] opacity-50" />
+      </div>
 
-      {/* CTA Button */}
-      {setActiveSection && (
-        <button 
-          onClick={() => setActiveSection('achievements')} 
-          className="mt-8 px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 via-purple-500 to-blue-500 text-white font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-base relative overflow-hidden group"
+      <div className="max-w-7xl w-full z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-4"
+          >
+            <Code className="w-4 h-4" />
+            Portfolio Showcase
+          </motion.div>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-cyan-200 text-transparent bg-clip-text mb-4"
+          >
+            Featured Projects
+          </motion.h2>
+          
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: 100 }}
+            className="h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full mb-6"
+          />
+        </div>
+
+        {/* Main Content Area */}
+        <div 
+          className="flex flex-col lg:flex-row gap-8 lg:gap-12"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          <span className="relative z-10">Explore My Achievements</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </button>
-      )}
+          {/* Left Sidebar - Project List */}
+          <div className="w-full lg:w-1/3 flex flex-col gap-4">
+            {projects.map((project, index) => (
+              <button
+                key={project.id}
+                onClick={() => {
+                  setActiveIndex(index);
+                  setProgress(0);
+                }}
+                className={`group relative p-4 rounded-xl text-left transition-all duration-300 border backdrop-blur-sm overflow-hidden ${
+                  activeIndex === index
+                    ? 'bg-white/10 border-purple-500/50 shadow-lg shadow-purple-500/10'
+                    : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10'
+                }`}
+              >
+                {/* Progress Bar for Active Item */}
+                {activeIndex === index && (
+                  <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 transition-all duration-100 ease-linear"
+                       style={{ width: `${progress}%` }} />
+                )}
+
+                <div className="flex items-center gap-4">
+                  <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className={`text-base font-bold mb-1 truncate transition-colors ${
+                      activeIndex === index ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
+                    }`}>
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 truncate">{project.category}</p>
+                  </div>
+                  {activeIndex === index && (
+                    <ChevronRight className="w-5 h-5 text-purple-400 animate-pulse" />
+                  )}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Right Panel - Detailed View */}
+          <div className="w-full lg:w-2/3 relative h-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col gap-6 h-full"
+              >
+                {/* Upper Part - Image Card */}
+                <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden group border border-white/10 shadow-2xl bg-white/5">
+                  <img 
+                    src={projects[activeIndex].image} 
+                    alt={projects[activeIndex].title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f1016] via-transparent to-transparent opacity-60" />
+                  
+                  {/* Floating Badges */}
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-xs font-semibold text-white flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                      {projects[activeIndex].status}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Lower Part - Details Card */}
+                <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-xl flex flex-col shadow-xl">
+                  <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                        {projects[activeIndex].title}
+                      </h3>
+                      <p className="text-purple-300 font-medium">
+                        {projects[activeIndex].subtitle}
+                      </p>
+                    </div>
+                    <div className="flex gap-3">
+                      <a
+                        href={projects[activeIndex].links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-full bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all duration-300 border border-cyan-500/20 hover:scale-110"
+                        title="View Live"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                      <a
+                        href={projects[activeIndex].links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-full bg-purple-500/10 text-purple-400 hover:bg-purple-500 hover:text-white transition-all duration-300 border border-purple-500/20 hover:scale-110"
+                        title="View Source"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-300 leading-relaxed mb-8 text-sm md:text-base">
+                    {projects[activeIndex].detailedDescription}
+                  </p>
+
+                  {/* Grid Features & Tech */}
+                  <div className="grid md:grid-cols-2 gap-8 mb-8">
+                    {/* Tech Stack */}
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-400 mb-4 flex items-center gap-2">
+                        <Code className="w-4 h-4" /> Technologies
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {projects[activeIndex].technologies.map((tech, i) => (
+                          <span
+                            key={i}
+                            className={`px-3 py-1 rounded-md text-xs font-medium border bg-gradient-to-r backdrop-blur-sm ${getTechColor(tech.color)}`}
+                          >
+                            {tech.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Key Features */}
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-400 mb-4 flex items-center gap-2">
+                        <Star className="w-4 h-4" /> Key Features
+                      </h4>
+                      <ul className="space-y-2">
+                        {projects[activeIndex].features.slice(0, 4).map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                            <ArrowRight className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Stats/Achievements Footer */}
+                  <div className="mt-auto pt-6 border-t border-white/10 grid grid-cols-2 md:grid-cols-3 gap-4">
+                     <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <Calendar className="w-4 h-4 text-cyan-400" />
+                        {projects[activeIndex].timeline}
+                     </div>
+                     <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <User className="w-4 h-4 text-purple-400" />
+                        {projects[activeIndex].teamSize || 'Solo Project'}
+                     </div>
+                     <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <Award className="w-4 h-4 text-yellow-400" />
+                        {projects[activeIndex].achievements.length} Achievements
+                     </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
