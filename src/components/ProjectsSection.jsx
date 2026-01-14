@@ -10,6 +10,50 @@ const imageAutomobiles = '/image/automobiles.png';
 
 const projects = [
   {
+  id: 'saatpherash-worldwide',
+  title: 'SaatPheras Worldwide',
+  subtitle: 'Global Matrimonial & Matchmaking Platform for NRIs',
+  description: 'A scalable, real-time matrimonial web platform designed for global users and NRIs, offering secure matchmaking, real-time chat & calling, subscriptions, and smart profile discovery.',
+  detailedDescription: 'SaatPheras Worldwide is a full-scale matrimonial ecosystem built to connect users across countries with speed, security, and reliability. The platform supports intelligent matchmaking, real-time chat and calling using WebSockets, push notifications, and subscription-based premium features. It focuses heavily on performance, accessibility, and SEO, achieving a 95+ Lighthouse score. The system includes advanced user controls such as block/unblock, role-based permissions, and secure token-based authentication with refresh cycles using HTTP-only cookies.',
+  image: '/image/SaatPherasWordWide.png', // add your project banner image
+  category: 'Social Tech / Matrimonial',
+  status: 'In Progress',
+  timeline: '2+ months',
+  teamSize: '3 developers',
+  technologies: [
+    { name: 'React.js', category: 'Frontend', color: 'blue' },
+    { name: 'Tailwind CSS', category: 'Styling', color: 'cyan' },
+    { name: 'Node.js', category: 'Backend', color: 'green' },
+    { name: 'Express.js', category: 'Backend', color: 'green' },
+    { name: 'MongoDB', category: 'Database', color: 'purple' },
+    { name: 'Socket.IO', category: 'Real-time', color: 'yellow' },
+    { name: 'JWT', category: 'Authentication', color: 'red' },
+    { name: 'AWS EC2 & S3', category: 'Cloud', color: 'orange' }
+  ],
+  features: [
+    'Global NRI Matchmaking System',
+    'Real-time Chat & Calling (Socket.IO)',
+    'Advanced User Profile Discovery',
+    'Block / Unblock & Privacy Controls',
+    'Subscription & Premium Plans',
+    'Push Notifications & Email Verification',
+    'Role-Based Access Control (RBAC)',
+    'SEO-Optimized & Performance-First UI'
+  ],
+  achievements: [
+    'Achieved 95+ Lighthouse performance & SEO score',
+    'Designed secure JWT access/refresh token lifecycle',
+    'Built scalable real-time communication architecture',
+    'Reduced initial load time by ~35%',
+    'Maintained near-zero CLS (layout shift)'
+  ],
+  links: {
+    live: 'https://dev.saatpherasworldwide.com', // replace if different
+    // replace if private
+  }
+}
+,
+  {
     id: 'dynamic-typing-webapp',
     title: 'Dynamic Typing Web App',
     subtitle: 'Real-time Typing Practice & Competition Platform',

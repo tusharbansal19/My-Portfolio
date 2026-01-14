@@ -21,9 +21,9 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-center gap-12 px-6 pt-8 md:pt-6 pb-4 relative overflow-visible min-h-[600px]">
+    <section className="flex flex-col md:flex-row items-center justify-center gap-12 px-6 pt-8 md:pt-6 pb-4 relative overflow-hidden min-h-[600px] w-full">
       {/* Cosmic Glow */}
-      <div className="absolute -z-10 left-1/2 top-[250px] w-[600px] bg-blue-800 opacity-20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -z-10 left-1/2 top-[250px] -translate-x-1/2 w-full max-w-[600px] h-[600px] bg-blue-800 opacity-20 rounded-full blur-3xl animate-pulse pointer-events-none" />
 
       {/* Hero Card */}
       <div className="flex-1 flex flex-col items-start justify-center max-w-xl z-10 py-10 md:py-32">
@@ -56,13 +56,13 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
       </div>
 
       {/* Circular Image with Cosmic Blue Rings */}
-      <div className="flex-shrink-0 z-10 relative flex items-center justify-center w-[400px] h-[400px]">
+      <div className="flex-shrink-0 z-10 relative flex items-center justify-center w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
         {/* Ring 1: Fast Spin, Inner */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           className="absolute rounded-full border-[3px] border-transparent border-t-cyan-500 border-r-blue-400 shadow-[0_0_15px_rgba(6,182,212,0.5)]"
-          style={{ width: '310px', height: '310px' }}
+          style={{ width: '75%', height: '75%' }}
         />
 
         {/* Ring 2: Medium Spin, Middle, split into 3 */}
@@ -70,7 +70,7 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
           animate={{ rotate: -360 }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           className="absolute rounded-full border-[2px] border-transparent border-t-purple-500/60 border-b-cyan-500/60"
-          style={{ width: '340px', height: '340px' }}
+          style={{ width: '85%', height: '85%' }}
         />
 
         {/* Ring 3: Slow Spin, Outer, faint */}
@@ -78,11 +78,11 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
           animate={{ rotate: 360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           className="absolute rounded-full border-[1px] border-transparent border-l-blue-500/30 border-r-purple-500/30"
-          style={{ width: '380px', height: '380px' }}
+          style={{ width: '95%', height: '95%' }}
         />
 
         {/* Main Image Container */}
-        <div className="relative w-72 h-72 rounded-full p-2 bg-gradient-to-br from-blue-500/10 to-transparent backdrop-blur-sm z-20">
+        <div className="relative w-[70%] h-[70%] rounded-full p-2 bg-gradient-to-br from-blue-500/10 to-transparent backdrop-blur-sm z-20">
           {/* Inner Glow Circle */}
           <div className="absolute inset-0 rounded-full bg-cyan-500/10 blur-xl animate-pulse"></div>
 
