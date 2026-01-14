@@ -23,7 +23,7 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
   return (
     <section className="flex flex-col md:flex-row items-center justify-center gap-12 px-6 pt-8 md:pt-6 pb-4 relative overflow-visible min-h-[600px]">
       {/* Cosmic Glow */}
-      <div className="absolute -z-10 left-1/2 top-[250px] w-[600px] bg-red-800 opacity-20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -z-10 left-1/2 top-[250px] w-[600px] bg-blue-800 opacity-20 rounded-full blur-3xl animate-pulse" />
 
       {/* Hero Card */}
       <div className="flex-1 flex flex-col items-start justify-center max-w-xl z-10 py-10 md:py-32">
@@ -55,13 +55,13 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
         </button>
       </div>
 
-      {/* Circular Image with Cosmic Red Rings */}
+      {/* Circular Image with Cosmic Blue Rings */}
       <div className="flex-shrink-0 z-10 relative flex items-center justify-center w-[400px] h-[400px]">
         {/* Ring 1: Fast Spin, Inner */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute rounded-full border-[3px] border-transparent border-t-red-500 border-r-red-400 shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+          className="absolute rounded-full border-[3px] border-transparent border-t-cyan-500 border-r-blue-400 shadow-[0_0_15px_rgba(6,182,212,0.5)]"
           style={{ width: '310px', height: '310px' }}
         />
 
@@ -69,7 +69,7 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute rounded-full border-[2px] border-transparent border-t-red-600/60 border-b-red-600/60"
+          className="absolute rounded-full border-[2px] border-transparent border-t-purple-500/60 border-b-cyan-500/60"
           style={{ width: '340px', height: '340px' }}
         />
 
@@ -77,16 +77,16 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute rounded-full border-[1px] border-transparent border-l-red-500/30 border-r-red-500/30"
+          className="absolute rounded-full border-[1px] border-transparent border-l-blue-500/30 border-r-purple-500/30"
           style={{ width: '380px', height: '380px' }}
         />
 
         {/* Main Image Container */}
-        <div className="relative w-72 h-72 rounded-full p-2 bg-gradient-to-br from-red-500/10 to-transparent backdrop-blur-sm z-20">
+        <div className="relative w-72 h-72 rounded-full p-2 bg-gradient-to-br from-blue-500/10 to-transparent backdrop-blur-sm z-20">
           {/* Inner Glow Circle */}
-          <div className="absolute inset-0 rounded-full bg-red-500/10 blur-xl animate-pulse"></div>
+          <div className="absolute inset-0 rounded-full bg-cyan-500/10 blur-xl animate-pulse"></div>
 
-          <div className="w-full h-full rounded-full overflow-hidden border-4 border-red-500/30 shadow-[0_0_30px_rgba(220,38,38,0.3)] relative z-10">
+          <div className="w-full h-full rounded-full overflow-hidden border-4 border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.3)] relative z-10">
             <img
               src="/image/myphoto.png"
               alt="Tushar Bansal"

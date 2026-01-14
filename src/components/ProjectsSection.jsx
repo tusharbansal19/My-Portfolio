@@ -153,6 +153,7 @@ const ProjectsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const duration = 5000; // 5 seconds
   const intervalRef = React.useRef(null);
 
@@ -164,7 +165,7 @@ const ProjectsSection = () => {
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const newProgress = (elapsed / duration) * 100;
-      
+
       if (newProgress >= 100) {
         setActiveIndex((prev) => (prev + 1) % projects.length);
         setProgress(0);
@@ -180,6 +181,20 @@ const ProjectsSection = () => {
       if (intervalRef.current) cancelAnimationFrame(intervalRef.current);
     };
   }, [activeIndex, isPaused]);
+
+  // Description Auto-Drop Logic
+  useEffect(() => {
+    // Open immediately when project changes
+    setIsDescriptionOpen(true);
+
+    // Close after 1 second (1000ms)
+    // Using a slightly longer timeout to account for initial transition
+    const timer = setTimeout(() => {
+      setIsDescriptionOpen(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [activeIndex]);
 
   // Color helper
   const getTechColor = (color) => {
@@ -197,17 +212,17 @@ const ProjectsSection = () => {
 
   return (
     <section className="py-20 px-4 md:px-8 lg:px-12 w-full relative min-h-screen flex flex-col items-center justify-center">
-      
+
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] opacity-50" />
-         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] opacity-50" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] opacity-50" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] opacity-50" />
       </div>
 
       <div className="max-w-7xl w-full z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-4"
@@ -215,8 +230,8 @@ const ProjectsSection = () => {
             <Code className="w-4 h-4" />
             Portfolio Showcase
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -224,8 +239,8 @@ const ProjectsSection = () => {
           >
             Featured Projects
           </motion.h2>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: 100 }}
             className="h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full mb-6"
@@ -233,7 +248,7 @@ const ProjectsSection = () => {
         </div>
 
         {/* Main Content Area */}
-        <div 
+        <div
           className="flex flex-col lg:flex-row gap-8 lg:gap-12"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -247,30 +262,28 @@ const ProjectsSection = () => {
                   setActiveIndex(index);
                   setProgress(0);
                 }}
-                className={`group relative p-4 rounded-xl text-left transition-all duration-300 border backdrop-blur-sm overflow-hidden ${
-                  activeIndex === index
+                className={`group relative p-4 rounded-xl text-left transition-all duration-300 border backdrop-blur-sm overflow-hidden ${activeIndex === index
                     ? 'bg-white/10 border-purple-500/50 shadow-lg shadow-purple-500/10'
                     : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10'
-                }`}
+                  }`}
               >
                 {/* Progress Bar for Active Item */}
                 {activeIndex === index && (
                   <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 transition-all duration-100 ease-linear"
-                       style={{ width: `${progress}%` }} />
+                    style={{ width: `${progress}%` }} />
                 )}
 
                 <div className="flex items-center gap-4">
                   <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
+                    <img
+                      src={project.image}
+                      alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className={`text-base font-bold mb-1 truncate transition-colors ${
-                      activeIndex === index ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
-                    }`}>
+                    <h3 className={`text-base font-bold mb-1 truncate transition-colors ${activeIndex === index ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
+                      }`}>
                       {project.title}
                     </h3>
                     <p className="text-xs text-gray-500 truncate">{project.category}</p>
@@ -296,13 +309,13 @@ const ProjectsSection = () => {
               >
                 {/* Upper Part - Image Card */}
                 <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden group border border-white/10 shadow-2xl bg-white/5">
-                  <img 
-                    src={projects[activeIndex].image} 
-                    alt={projects[activeIndex].title} 
+                  <img
+                    src={projects[activeIndex].image}
+                    alt={projects[activeIndex].title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f1016] via-transparent to-transparent opacity-60" />
-                  
+
                   {/* Floating Badges */}
                   <div className="absolute top-4 left-4 flex gap-2">
                     <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-xs font-semibold text-white flex items-center gap-2">
@@ -345,9 +358,38 @@ const ProjectsSection = () => {
                     </div>
                   </div>
 
-                  <p className="text-gray-300 leading-relaxed mb-8 text-sm md:text-base">
-                    {projects[activeIndex].detailedDescription}
-                  </p>
+                  <div className="mb-8 group/desc">
+                    <motion.div
+                      initial={{ height: "auto" }}
+                      animate={{ height: isDescriptionOpen ? "auto" : "60px" }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="overflow-hidden relative"
+                    >
+                      <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                        {projects[activeIndex].detailedDescription}
+                      </p>
+
+                      {/* Gradient fade for collapsed state */}
+                      <AnimatePresence>
+                        {!isDescriptionOpen && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-[#151525]/90 to-transparent"
+                          />
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+
+                    <button
+                      onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+                      className="mt-3 text-xs font-semibold uppercase tracking-wider text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors group-hover/desc:text-cyan-300"
+                    >
+                      {isDescriptionOpen ? 'Show Less' : 'Read More'}
+                      <ChevronRight className={`w-3 h-3 transition-transform duration-300 ${isDescriptionOpen ? '-rotate-90' : 'rotate-90'}`} />
+                    </button>
+                  </div>
 
                   {/* Grid Features & Tech */}
                   <div className="grid md:grid-cols-2 gap-8 mb-8">
@@ -386,18 +428,18 @@ const ProjectsSection = () => {
 
                   {/* Stats/Achievements Footer */}
                   <div className="mt-auto pt-6 border-t border-white/10 grid grid-cols-2 md:grid-cols-3 gap-4">
-                     <div className="flex items-center gap-2 text-sm text-gray-400">
-                        <Calendar className="w-4 h-4 text-cyan-400" />
-                        {projects[activeIndex].timeline}
-                     </div>
-                     <div className="flex items-center gap-2 text-sm text-gray-400">
-                        <User className="w-4 h-4 text-purple-400" />
-                        {projects[activeIndex].teamSize || 'Solo Project'}
-                     </div>
-                     <div className="flex items-center gap-2 text-sm text-gray-400">
-                        <Award className="w-4 h-4 text-yellow-400" />
-                        {projects[activeIndex].achievements.length} Achievements
-                     </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <Calendar className="w-4 h-4 text-cyan-400" />
+                      {projects[activeIndex].timeline}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <User className="w-4 h-4 text-purple-400" />
+                      {projects[activeIndex].teamSize || 'Solo Project'}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <Award className="w-4 h-4 text-yellow-400" />
+                      {projects[activeIndex].achievements.length} Achievements
+                    </div>
                   </div>
                 </div>
               </motion.div>
