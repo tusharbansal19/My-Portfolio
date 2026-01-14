@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown, FaDownload } from 'react-icons/fa';
 import { Typewriter } from 'react-simple-typewriter';
 // import { useNavigate } from 'react-router-dom';
@@ -20,11 +21,12 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-center gap-4 px-6 pt-8 md:pt-6 pb-4 relative overflow-hidden">
+    <section className="flex flex-col md:flex-row items-center justify-center gap-12 px-6 pt-8 md:pt-6 pb-4 relative overflow-visible min-h-[600px]">
       {/* Cosmic Glow */}
-      <div className="absolute -z-10 left-1/2 top-[250px] w-[600px] bg-red-800  bg-cyan-400 opacity-20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute -z-10 left-1/2 top-[250px] w-[600px] bg-red-800 opacity-20 rounded-full blur-3xl animate-pulse" />
+
       {/* Hero Card */}
-      <div className="flex-1 flex flex-col items-start justify-center max-w-xl z-10 py-10 md:py-32 ">
+      <div className="flex-1 flex flex-col items-start justify-center max-w-xl z-10 py-10 md:py-32">
         <h2 className="text-lg font-semibold text-[#a259ff] mb-2 tracking-widest uppercase" style={{ fontFamily: 'Montserrat, Poppins, sans-serif', letterSpacing: '0.15em' }}>I am</h2>
         <div className="w-full flex flex-col items-start">
           {/* <span className="sr-only">TUSHAR BANSAL</span> */}
@@ -51,14 +53,46 @@ const HeroSection = ({ setActiveSection, darkMode }) => {
         <button onClick={handleContactMe} className="flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white font-bold shadow-lg hover:scale-105 transition-transform mb-8">
           Contact Me
         </button>
-        {/* Stats */}
-
       </div>
-      {/* Angled Image Card */}
-      <div className="flex-shrink-0 z-10">
-        <div className="w-72 h-80 rounded-2xl shadow-2xl flex items-center justify-center transform rotate-6 hover:rotate-3 transition-transform duration-500 relative bg-gradient-to-br from-purple-800/60 via-cyan-400/20 to-blue-900/60 backdrop-blur-xl border-4 border-purple-400/60" style={{ boxShadow: '0 0 40px 10px #a259ff55, 0 2px 32px 0 #0008' }}>
-          <img src="/image/myphoto.png" alt="TUSHAR BANSAL" className="w-60 h-72 object-cover rounded-xl shadow-lg border-4 border-[#a259ff]" />
-          <div className="absolute -inset-1 rounded-2xl border-2 border-[#a259ff] opacity-60 blur-lg"></div>
+
+      {/* Circular Image with Cosmic Red Rings */}
+      <div className="flex-shrink-0 z-10 relative flex items-center justify-center w-[400px] h-[400px]">
+        {/* Ring 1: Fast Spin, Inner */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute rounded-full border-[3px] border-transparent border-t-red-500 border-r-red-400 shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+          style={{ width: '310px', height: '310px' }}
+        />
+
+        {/* Ring 2: Medium Spin, Middle, split into 3 */}
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute rounded-full border-[2px] border-transparent border-t-red-600/60 border-b-red-600/60"
+          style={{ width: '340px', height: '340px' }}
+        />
+
+        {/* Ring 3: Slow Spin, Outer, faint */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute rounded-full border-[1px] border-transparent border-l-red-500/30 border-r-red-500/30"
+          style={{ width: '380px', height: '380px' }}
+        />
+
+        {/* Main Image Container */}
+        <div className="relative w-72 h-72 rounded-full p-2 bg-gradient-to-br from-red-500/10 to-transparent backdrop-blur-sm z-20">
+          {/* Inner Glow Circle */}
+          <div className="absolute inset-0 rounded-full bg-red-500/10 blur-xl animate-pulse"></div>
+
+          <div className="w-full h-full rounded-full overflow-hidden border-4 border-red-500/30 shadow-[0_0_30px_rgba(220,38,38,0.3)] relative z-10">
+            <img
+              src="/image/myphoto.png"
+              alt="Tushar Bansal"
+              className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
+            />
+          </div>
         </div>
       </div>
 
